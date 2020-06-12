@@ -43,3 +43,5 @@ This project is open source without any fees added, but users can donate ETH, BU
 Testing Smart Contracts, soon available for everyone 
 
 ### Mainnet Deploy scheduled for June 18 2020
+
+PS: We'll use this standard for the Logo Challange! More info soon!
