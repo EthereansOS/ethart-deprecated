@@ -11,7 +11,7 @@ contract TransferFunctionality {
     }
 
     function transfer(address sender, uint256, address subject, address from, address to, uint256 tokenId, bool safe, bytes memory data) public {
-        (,IStateHolder stateHolder,) = _checkPermmissions(sender, subject);
+        (IMVDProxy proxy, IStateHolder stateHolder,) = _checkPermmissions(sender, subject);
         require(stateHolder.getAddress(_stringConcat(_toString(tokenId), "owner", "")) == from, "Wrong Token Owner!");
         require(
             subject == from ||
@@ -23,14 +23,26 @@ contract TransferFunctionality {
 
         uint256 oldBalance = stateHolder.getUint256(_stringConcat(_toString(from), "balance", ""));
         _updateFromIndex(stateHolder, from, oldBalance, tokenId);
-        stateHolder.setUint256(_stringConcat(_toString(from), "balance", ""), oldBalance - 1);
+        if(oldBalance == 1) {
+            stateHolder.clear(_stringConcat(_toString(from), "balance", ""));
+        } else {
+            stateHolder.setUint256(_stringConcat(_toString(from), "balance", ""), oldBalance - 1);
+        }
 
         oldBalance = stateHolder.getUint256(_stringConcat(_toString(to), "balance", ""));
         stateHolder.setUint256(_stringConcat(_toString(to), _toString(oldBalance), ""), tokenId);
         stateHolder.setUint256(_stringConcat(_toString(to), "indexOf", _toString(tokenId)), oldBalance);
         stateHolder.setUint256(_stringConcat(_toString(to), "balance", ""), oldBalance + 1);
 
-        require(!safe || IERC721DFO(stateHolder.getAddress('token')).checkOnERC721Received(subject, from, to, tokenId, data), "Safe Fransfer Failed!");
+        proxy.emitEvent("Transfer(address_indexed,address_indexed,address,address,uint256)", abi.encodePacked(from), abi.encodePacked(to), abi.encode(from, to, tokenId));
+
+        IDFOBased721 iDFOBased721 = IDFOBased721(stateHolder.getAddress('token'));
+
+        if(address(iDFOBased721) != address(0)) {
+            iDFOBased721.raiseTransferEvent(from, to, tokenId);
+        }
+
+        require(!safe || iDFOBased721.checkOnERC721Received(subject, from, to, tokenId, data), "Safe Fransfer Failed!");
     }
 
     function _updateFromIndex(IStateHolder stateHolder, address from, uint256 oldBalance, uint256 tokenId) private {
@@ -46,7 +58,7 @@ contract TransferFunctionality {
         stateHolder.setUint256(_stringConcat(_toString(from), "indexOf", _toString(lastToken)), prevPosition);
     }
 
-    function _checkPermmissions(address sender, address subject) private returns (IMVDProxy proxy, IStateHolder stateHolder, IMVDFunctionalitiesManager functionalitiesManager) {
+    function _checkPermmissions(address sender, address subject) private view returns (IMVDProxy proxy, IStateHolder stateHolder, IMVDFunctionalitiesManager functionalitiesManager) {
         proxy = IMVDProxy(msg.sender);
         stateHolder = IStateHolder(proxy.getStateHolderAddress());
         functionalitiesManager = IMVDFunctionalitiesManager(proxy.getMVDFunctionalitiesManagerAddress());
@@ -125,6 +137,7 @@ contract TransferFunctionality {
 interface IMVDProxy {
     function getMVDFunctionalitiesManagerAddress() external view returns(address);
     function getStateHolderAddress() external view returns(address);
+    function emitEvent(string calldata eventSignature, bytes calldata firstIndex, bytes calldata secondIndex, bytes calldata data) external;
 }
 
 interface IMVDFunctionalitiesManager {
@@ -146,6 +159,7 @@ interface IStateHolder {
     function setAddress(string calldata varName, address val) external returns (address);
 }
 
-interface IERC721DFO {
+interface IDFOBased721 {
+    function raiseTransferEvent(address from, address to, uint256 tokenId) external;
     function checkOnERC721Received(address subject, address from, address to, uint256 tokenId, bytes calldata _data) external returns (bool);
 }

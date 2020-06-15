@@ -4,6 +4,12 @@ var Index = React.createClass({
         "spa/balance",
         "spa/explore"
     ],
+    onChange(e) {
+        e && e.preventDefault && e.preventDefault() && e.stopPropagation && e.stopPropagation();
+        this.emit('loader/toggle', true);
+        var _this = this;
+        this.controller.upload(e.target.files[0]).catch(e => alert(e.message || e)).then(() => _this.emit('loader/toggle', false));
+    },
     render() { return (
     <section>
         <section className="HEADER">
@@ -45,6 +51,7 @@ var Index = React.createClass({
                         <Explore/>
                     </section>
             </section>
+            <input type="file" onChange={this.onChange}/>
         </section>
         <footer>
             <h4>Made with ❤️ by the <a href="https://dfohub.com" target="_Blank">DFOhub</a> team for Etherean Artists.</h4>

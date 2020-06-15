@@ -61,7 +61,15 @@ interface IERC721Enumerable {
     function tokenByIndex(uint256 index) external view returns (uint256);
 }
 
-contract DFOBased721 is IERC165, IERC721, IERC721Metadata, IERC721Enumerable {
+interface IDFOBased721 {
+    function getProxy() external view returns (address);
+    function setProxy(address proxy) external;
+    function raiseTransferEvent(address from, address to, uint256 tokenId) external;
+    function raiseApprovalEvent(address subject, address operator, bool forAll, bool approved, uint256 tokenId) external;
+    function checkOnERC721Received(address subject, address from, address to, uint256 tokenId, bytes calldata _data) external returns (bool);
+}
+
+contract DFOBased721 is IDFOBased721, IERC165, IERC721, IERC721Metadata, IERC721Enumerable {
 
     bytes4 private constant _ERC721_RECEIVED = 0x150b7a02;
 
@@ -73,18 +81,14 @@ contract DFOBased721 is IERC165, IERC721, IERC721Metadata, IERC721Enumerable {
     bytes4 private constant _INTERFACE_ID_ERC721_ENUMERABLE = 0x780e9d63;
 
     address private _proxy;
-    string private _name;
-    string private _symbol;
 
-    constructor(address proxy, string memory name, string memory symbol) public {
-        init(proxy, name, symbol);
+    constructor(address proxy) public {
+        setProxy(proxy);
     }
 
-    function init(address proxy, string memory name, string memory symbol) public {
-        require(_isEmpty(_symbol), "Init already called!");
-        _proxy = proxy;
-        _name = name;
-        _symbol = symbol;
+    modifier authorizedOnly {
+        require(IMVDFunctionalitiesManager(IMVDProxy(_proxy).getMVDFunctionalitiesManagerAddress()).isAuthorizedFunctionality(msg.sender), "Unauthorized Access!");
+        _;
     }
 
     function supportsInterface(bytes4 interfaceId) public view override returns (bool) {
@@ -95,21 +99,21 @@ contract DFOBased721 is IERC165, IERC721, IERC721Metadata, IERC721Enumerable {
         interfaceId == _INTERFACE_ID_ERC721_ENUMERABLE;
     }
 
-    function setProxy(address proxy) public {
+    function setProxy(address proxy) public override {
         require(_proxy == address(0) || IMVDFunctionalitiesManager(IMVDProxy(_proxy).getMVDFunctionalitiesManagerAddress()).isAuthorizedFunctionality(msg.sender), "Unauthorized action!");
         _proxy = proxy;
     }
 
-    function getProxy() public view returns (address) {
+    function getProxy() public override view returns (address) {
         return _proxy;
     }
 
     function name() public override view returns(string memory) {
-        return _name;
+        return IERC20(IMVDProxy(_proxy).getToken()).name();
     }
 
     function symbol() public override view returns(string memory) {
-        return _symbol;
+        return IERC20(IMVDProxy(_proxy).getToken()).symbol();
     }
 
     function tokenURI(uint256 tokenId) public override view returns (string memory) {
@@ -118,7 +122,7 @@ contract DFOBased721 is IERC165, IERC721, IERC721Metadata, IERC721Enumerable {
     }
 
     function totalSupply() public override view returns (uint256) {
-        return IStateHolder(IMVDProxy(_proxy).getStateHolderAddress()).getUint256(_stringConcat("totalSupply", "", ""));
+        return IStateHolder(IMVDProxy(_proxy).getStateHolderAddress()).getUint256("totalSupply");
     }
 
     function balanceOf(address owner) public override view returns (uint256) {
@@ -134,7 +138,7 @@ contract DFOBased721 is IERC165, IERC721, IERC721Metadata, IERC721Enumerable {
     }
 
     function isApprovedForAll(address owner, address operator) public override view returns (bool) {
-        IStateHolder(IMVDProxy(_proxy).getStateHolderAddress()).getBool(_stringConcat(_toString(owner), "approved", _toString(operator)));
+        return IStateHolder(IMVDProxy(_proxy).getStateHolderAddress()).getBool(_stringConcat(_toString(owner), "approved", _toString(operator)));
     }
 
     function tokenOfOwnerByIndex(address owner, uint256 index) public override view returns (uint256) {
@@ -142,6 +146,9 @@ contract DFOBased721 is IERC165, IERC721, IERC721Metadata, IERC721Enumerable {
     }
 
     function tokenByIndex(uint256 index) public override view returns (uint256) {
+        if(index + 1 >= IStateHolder(IMVDProxy(_proxy).getStateHolderAddress()).getUint256("nextId")) {
+            return 0;
+        }
         return index + 1;
     }
 
@@ -149,28 +156,35 @@ contract DFOBased721 is IERC165, IERC721, IERC721Metadata, IERC721Enumerable {
         safeTransferFrom(from, to, tokenId, "");
     }
 
-    function safeTransferFrom(address from, address to, uint256 tokenId, bytes calldata data) public override {
+    function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory data) public override {
         IMVDProxy(_proxy).submit('transfer', abi.encode(address(0), 0, msg.sender, from, to, tokenId, true, data));
-        emit Transfer(from, to, tokenId);
     }
 
     function transferFrom(address from, address to, uint256 tokenId) public override {
         IMVDProxy(_proxy).submit('transfer', abi.encode(address(0), 0, msg.sender, from, to, tokenId, false, ""));
-        emit Transfer(from, to, tokenId);
     }
 
     function approve(address operator, uint256 tokenId) public override {
         IMVDProxy(_proxy).submit('approve', abi.encode(address(0), 0, msg.sender, operator, false, false, tokenId));
-        emit Approval(msg.sender, operator, tokenId);
     }
 
     function setApprovalForAll(address operator, bool _approved) public override {
         IMVDProxy(_proxy).submit('approve', abi.encode(address(0), 0, msg.sender, operator, true, _approved, 0));
-        emit ApprovalForAll(msg.sender, operator, _approved);
     }
 
-    function checkOnERC721Received(address subject, address from, address to, uint256 tokenId, bytes memory _data) private returns (bool) {
-        require(IMVDFunctionalitiesManager(IMVDProxy(_proxy).getMVDFunctionalitiesManagerAddress()).isAuthorizedFunctionality(msg.sender), "Unauthorized Access!");
+    function raiseTransferEvent(address from, address to, uint256 tokenId) public override authorizedOnly {
+        emit Transfer(from, to, tokenId);
+    }
+
+    function raiseApprovalEvent(address subject, address operator, bool forAll, bool approved, uint256 tokenId) public override authorizedOnly {
+        if(forAll) {
+            emit ApprovalForAll(subject, operator, approved);
+        } else {
+            emit Approval(subject, operator, tokenId);
+        }
+    }
+
+    function checkOnERC721Received(address subject, address from, address to, uint256 tokenId, bytes memory _data) public override authorizedOnly returns (bool) {
         if (!_isContract(to)) {
             return true;
         }
@@ -273,6 +287,7 @@ interface IERC721Receiver {
 }
 
 interface IMVDProxy {
+    function getToken() external view returns(address);
     function getMVDFunctionalitiesManagerAddress() external view returns(address);
     function getStateHolderAddress() external view returns(address);
     function submit(string calldata codeName, bytes calldata data) external payable returns(bytes memory returnData);
@@ -295,4 +310,9 @@ interface IStateHolder {
     function setUint256(string calldata varName, uint256 val) external returns(uint256);
     function getAddress(string calldata varName) external view returns (address);
     function setAddress(string calldata varName, address val) external returns (address);
+}
+
+interface IERC20 {
+    function name() external view returns (string memory);
+    function symbol() external view returns (string memory);
 }

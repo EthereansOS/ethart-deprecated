@@ -11,20 +11,28 @@ contract ApproveFunctionality {
     }
 
     function approve(address sender, uint256, address subject, address operator, bool forAll, bool approveForAll, uint256 tokenId) public {
-        (,IStateHolder stateHolder,) = _checkPermmissions(sender, subject);
-        require(stateHolder.getAddress(_stringConcat(_toString(tokenId), "owner", "")) == subject, "Not your token!");
+        (IMVDProxy proxy,IStateHolder stateHolder,) = _checkPermmissions(sender, subject);
+        if(!forAll) {
+            require(stateHolder.getAddress(_stringConcat(_toString(tokenId), "owner", "")) == subject, "Not your token!");
+        }
         if(forAll) {
             if(approveForAll) {
                 stateHolder.setBool(_stringConcat(_toString(subject), "approved", _toString(operator)), approveForAll);
             } else {
                 stateHolder.clear(_stringConcat(_toString(subject), "approved", _toString(operator)));
             }
+            proxy.emitEvent("ApprovalForAll(address_indexed,address_indexed,address,address,bool)", abi.encodePacked(subject), abi.encodePacked(operator), abi.encode(subject, operator, approveForAll));
         } else {
             stateHolder.setAddress(_stringConcat(_toString(subject), "approved", _toString(tokenId)), operator);
+            proxy.emitEvent("Approval(address_indexed,address_indexed,address,address,uint256)", abi.encodePacked(subject), abi.encodePacked(operator), abi.encode(subject, operator, tokenId));
+        }
+        IDFOBased721 dFOBased721 = IDFOBased721(stateHolder.getAddress("token"));
+        if(address(dFOBased721) != address(0)) {
+            dFOBased721.raiseApprovalEvent(subject, operator, forAll, approveForAll, tokenId);
         }
     }
 
-    function _checkPermmissions(address sender, address subject) private returns (IMVDProxy proxy, IStateHolder stateHolder, IMVDFunctionalitiesManager functionalitiesManager) {
+    function _checkPermmissions(address sender, address subject) private view returns (IMVDProxy proxy, IStateHolder stateHolder, IMVDFunctionalitiesManager functionalitiesManager) {
         proxy = IMVDProxy(msg.sender);
         stateHolder = IStateHolder(proxy.getStateHolderAddress());
         functionalitiesManager = IMVDFunctionalitiesManager(proxy.getMVDFunctionalitiesManagerAddress());
@@ -95,6 +103,7 @@ contract ApproveFunctionality {
 interface IMVDProxy {
     function getMVDFunctionalitiesManagerAddress() external view returns(address);
     function getStateHolderAddress() external view returns(address);
+    function emitEvent(string calldata eventSignature, bytes calldata firstIndex, bytes calldata secondIndex, bytes calldata data) external;
 }
 
 interface IMVDFunctionalitiesManager {
@@ -114,4 +123,8 @@ interface IStateHolder {
     function setUint256(string calldata varName, uint256 val) external returns(uint256);
     function getAddress(string calldata varName) external view returns (address);
     function setAddress(string calldata varName, address val) external returns (address);
+}
+
+interface IDFOBased721 {
+    function raiseApprovalEvent(address subject, address operator, bool forAll, bool approved, uint256 tokenId) external;
 }

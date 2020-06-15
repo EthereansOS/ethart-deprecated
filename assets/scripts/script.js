@@ -104,20 +104,8 @@ window.onEthereumUpdate = function onEthereumUpdate(millis) {
                 if (network === undefined || network === null) {
                     return alert('This network is actually not supported!');
                 }
-                window.dfoHub = {
-                    key: 'DFO',
-                    dFO: await window.loadDFO(window.getNetworkElement('dfoAddress')),
-                    startBlock: window.getNetworkElement('deploySearchStart')
-                };
-                window.ENSController = window.newContract(window.context.ENSAbi, window.context.ensAddress);
-                try {
-                    window.dfoHubENSResolver = window.newContract(window.context.resolverAbi, await window.blockchainCall(window.ENSController.methods.resolver, nameHash.hash(nameHash.normalize("dfohub.eth"))));
-                } catch (e) {}
-
-                window.list = {
-                    DFO: window.dfoHub
-                };
                 update = true;
+                window.DFOHub(window.web3).load(window.getNetworkElement('ethArtAddress')).then(ethArt => window.ethArt = ethArt);
             }
             try {
                 window.walletAddress = (await window.web3.eth.getAccounts())[0];
