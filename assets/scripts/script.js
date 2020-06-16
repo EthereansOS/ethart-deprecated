@@ -11,7 +11,7 @@ window.Main = async function Main() {
     if (!await window.blockchainSetup()) {
         return;
     }
-    window.choosePage();
+    
 };
 
 window.newContract = function newContract(abi, address) {

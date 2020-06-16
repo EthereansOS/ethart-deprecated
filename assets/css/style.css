@@ -103,14 +103,23 @@ footer h4 a {font-weight: bolder;display: inline-block; color: #f1f1f1;}
 .EXPLORE-ITEMS .ASSET-PAGE {display: inline-block;width: 100%;height: 30px;margin-top: 10px;}
 .EXPLORE-ITEMS .ASSET-PAGE p {color: #b8b8b8; margin: 0 15px; font-size: 13px;}
 .EXPLORE-ITEMS .ASSET-PAGE a {color: #b8b8b8; text-decoration: none; font-weight: bold;}
-.NoWeb3 .DisclamerWeb3 {width: 100%; text-align: center; display: inline-block; margin: 300px auto;}
-.NoWeb3 .DisclamerWeb3 h2 {font-size: 20px;font-weight: bold;color: #f1f1f1;}
-.NoWeb3 .DisclamerWeb3 p {font-size: 16px; color: #f1f1f1; line-height: 1.4;}
-.NoWeb3 .DisclamerWeb3 p a {font-size: 15px; color: #ff00ff; font-weight: bold; padding: 0 3px;}
-.NoWeb3 .DisclamerWeb3 p a:hover {color: #ffffff; background-color: #ff00ff; text-decoration: none;}
+
+.BETABANNER {position: fixed; bottom: 0; left: 0; width: 100%; height: 100%; max-height: 100%; z-index: 9999999999999999999; background-color: #000000; overflow: hidden; text-align: center; background: url("/assets/img/space.gif") no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}
+.BETABANNER section {width: 280px; display: inline-block; color: #ffffff; background-color: #00000099; border-radius: 20px; text-align: center; margin-top: 10%; padding: 10px 0;}
+.BETABANNER h2 {font-size: 20px; font-weight: bold; line-height: 1.5;}
+.BETABANNER h2 span {color: #398bf0;}
+.BETABANNER h3 {font-size: 16px; width: 85%; font-weight: bold; display: inline-block; margin: 10px auto;}
+.BETABANNER p {font-size: 12px; line-height: 1.3; width: 75%;display: inline-block; margin: 10px auto; font-weight: bold;}
+.BETABANNER p a {text-decoration: underline; color: #398bf0; font-weight: bold;}
+.BETABANNER section > a {font-size: 13px; padding: 10px 15px; background-color: #398bf0; color: #ffffff; font-weight: bold; text-decoration: none; margin: 25px 30% 20px 30%; display: inline-block;}
+.BETABANNER section > a:hover {background-color: #398bf0;}
 
 @media only screen and (min-device-width: 500px) {
     .MANAGE h2 {margin-bottom: 150px;}
+    .BETABANNER section {width: 600px;}
+    .BETABANNER h2 {font-size: 30px;}
+    .BETABANNER h3 {font-size: 20px;}
+    .BETABANNER p {font-size: 14px;}
     .SMALL-BOX {margin-right: 20px;}
     .HUGE-MENU {width: 680px;}
     .shadowPi {width: 720px;}
