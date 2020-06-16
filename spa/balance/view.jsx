@@ -1,23 +1,28 @@
 var Balance = React.createClass({
-    render() { return (
-    <section className="BALANCE-ITEMS">
-        <section className="BALANCE-ITEM">
+    componentDidMount() {
+        this.controller.renderItems();
+    },
+    renderItem(it) {
+        return (<section key={it.tokenId} className="BALANCE-ITEM">
             <figure>
-                <img src="/assets/img/BUIDL.png"></img>
+                <img src={it.name ? (it.image || "/assets/img/missingno.png") : "/assets/img/missingno.png"}></img>
             </figure>
             <section className="ASSET-INFO">
-                <p>My First NFT</p>
-                <a>0x5D40c724ba3e7Ffa6a...</a>
+                <p>#{it.tokenId} - {it.name ? window.shortenWord(it.name) : "MISSINGNO."}</p>
+                <a href={this.state.etherscanLink + it.tokenId} target="_blank">{window.shortenWord(this.state.tokenAddress, 18)}</a>
             </section>
             <section className="ASSET-ACTION">
-                <a>Send</a>
-                <a className="OS">OpenSea</a>
+                <a href="javascript:;">Send</a>
+                <a className="OS" target="_blank" href={this.state.openSeaLink + it.tokenId}>OpenSea</a>
             </section>
-        </section>
-        <section className="BALANCE-LOAD">
-            <a className="BALANCE-LOAD-FX">Refresh &#8635;</a>
-        </section>
-    </section>
-    );
+        </section>);
+    },
+    render() {
+        return (<section className="BALANCE-ITEMS">
+            {this.state && this.state.items && Object.values(this.state.items).map(this.renderItem)}
+            <section className="BALANCE-LOAD">
+                <a className="BALANCE-LOAD-FX" href="javascript:;" onClick={this.controller.renderItems}>Refresh &#8635;</a>
+            </section>
+        </section>);
     }
 });

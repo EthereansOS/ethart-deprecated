@@ -1,12 +1,10 @@
-var Deploy = React.createClass({
-    
-    render() { return (
-       <section>
+var NftFile = React.createClass({
+    render() {
+        return (<section>
             <section className="DEPLOY-INFO">
-                <label>NFT File:</label>
-                <input type="file"></input>
+                <label htmlFor="data">NFT File:</label>
+                <input id="data" type="file"></input>
             </section>
-        </section>
-    );
+        </section>);
     }
 });
