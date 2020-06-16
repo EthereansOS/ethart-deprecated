@@ -1,12 +1,14 @@
-html {background-color: #080808;margin: 0;}
+html {background-color: #01182b;margin: 0;}
 h1,h4,h3,h6,h2 {margin-block-end: 0;margin-block-start: 0;}
-body {width: 100%; position: relative; margin: 0; font-family: devioussans02regular,Helvetica Neue,Helvetica,Arial,メイリオ\, meiryo,ヒラギノ角ゴ pro w3,hiragino kaku gothic pro,sans-serif;}
+body {width: 100%; position: relative; margin: 0; font-family: Helvetica Neue,Helvetica,Arial,メイリオ\, meiryo,ヒラギノ角ゴ pro w3,hiragino kaku gothic pro,sans-serif;}
 ol,ul, li {margin-block-start: 0; margin-block-end: 0; list-style-type: none; padding-inline-start:0;}
+p {display: inline-block;margin-block-start: 0px;margin-block-end: 0px;margin-inline-start: 0px;margin-inline-end: 0px;}
+figure {margin-block-start: 0;margin-block-end: 0;margin-inline-start: 0px;margin-inline-end: 0px;}
 ul {width: 900px; margin: 10px auto 10px auto;}
 li {width: 100%; display: inline-block; margin: 5px 0; text-align: center; padding: 5px 0;}
 li span {width: 30px; text-align: center; font-size: 16px; display: inline-block; color: #f1f1f1;}
 li p {width: 600px; text-align: center; font-size: 18px; display: inline-block; font-weight: bold; color: #f1f1f1; text-align: left;}
-.loaderMinimino {border: 2px solid #f3f3f3;border-radius: 50%;border-top: 2px solid #ff00ff;width: 15px !important;height: 15px !important;-webkit-animation: spin 2s linear infinite;animation: spin 2s linear infinite;display: inline-block; vertical-align: middle;}
+.loaderMinimino {border: 2px solid #f3f3f3;border-radius: 50%;border-top: 2px solid #d664dd;width: 15px !important;height: 15px !important;-webkit-animation: spin 2s linear infinite;animation: spin 2s linear infinite;display: inline-block; vertical-align: middle;}
 @-webkit-keyframes spin {0% { -webkit-transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg);}}
 @keyframes spin {0% { transform: rotate(0deg); }100% { transform: rotate(360deg);}}
 @keyframes lds-ellipsis1 {0% {transform: scale(0);}100% {transform: scale(1);}}
@@ -16,31 +18,105 @@ li p {width: 600px; text-align: center; font-size: 18px; display: inline-block; 
 @keyframes dash {to {stroke-dashoffset: 136;}}
 @-webkit-keyframes rotate {100% {-webkit-transform: rotate(360deg);transform: rotate(360deg);}}
 @keyframes rotate {100% {-webkit-transform: rotate(360deg);transform: rotate(360deg);}}
-.DEPLOY-HEADER {width: 100%; display: inline-block; text-align: center;}
-.DEPLOY-HEADER h1 {color: #f1f1f1; font-weight: bold; font-size: 60px; padding: 10px 0; display: inline-block; width: 100%;}
-.DEPLOY-HEADER h2 {color: #f3f3f3;font-weight: normal; font-size: 15px; padding: 10px 0; display: inline-block; width: 100%;}
-.DEPLOY-HEADER h1 span {color: #f1f1f1; font-weight: lighter;}
-.DEPLOY-MENU {width: 300px; background-color: #000000; border-radius: 10px; display: inline-block; margin: 20px auto; padding:20px;}
-.DEPLOY-HEADER h3 {color: #bfbfbf; font-size: 21px;}
-.DEPLOY-HEADER h3 a {color: #bfbfbf; font-size: 16px;}
-.DEPLOY-HEADER h6 {color: #f1f1f1; font-size: 12px; font-weight: normal; line-height: 1.6;}
-.DEPLOY-ITEM {width: 100%; margin-top: 40px; color: #f1f1f1; text-align: left;}
+.HEADER {text-align: center; margin-bottom: 50px; width: 100%; display: inline-block; position: relative;}
+.HEADER .WALLET {display: none;}
+.HEADER h1 {color: #f1f1f1; font-weight: bold; font-size: 50px; padding: 10px 0; display: inline-block; width: 100%; line-height: 2;}
+.HEADER h1 img {width: 100px;height: 22px; margin-right: 10px;vertical-align: middle;}
+.HEADER h1 .LOGO-Y-2 {border-bottom: 5px solid #06d1da;}
+.HEADER h1 .LOGO-P {border-top: 5px solid #8f00ff;}
+.HEADER h1 .LOGO-G {border-bottom: 5px solid #5fe084;}
+.HEADER h1 .LOGO-Pi {border-top: 5px solid #d664dd;}
+.MANAGE {width: 100%; display: inline-block; text-align: center;}
+.MANAGE h2, .EXPLORE h2 {color: #f3f3f3;font-weight: normal; font-size: 15px; padding: 10px 0; display: inline-block; width: 100%;}
+.SMALL-BOX {width: 360px; margin: 20px auto; display: inline-block; position: relative; height: 360px;}
+.HUGE-BOX {width: 360px; margin: 20px auto; display: inline-block; position: relative; height: 740px;}
+.shadowP {background-color: #8f00ff; position: absolute; width: 340px; height: 340px; z-index: -1;}
+.shadowP1 {top: 8px; left: 8px;}
+.shadowP2 {top: 11px; left: 11px;}
+.shadowP3 {top: 14px; left: 14px;}
+.shadowG {background-color: #5fe084; position: absolute; width: 340px; height: 340px; z-index: -1;}
+.shadowG1 {top: 8px; left: 8px;}
+.shadowG2 {top: 11px; left: 11px;}
+.shadowG3 {top: 14px; left: 14px;}
+.shadowPi {background-color: #d664dd; position: absolute; width: 340px; height: 720px; z-index: -1;}
+.shadowPi1 {top: 8px; left: 8px;}
+.shadowPi2 {top: 11px; left: 11px;}
+.shadowPi3 {top: 14px; left: 14px;}
+.SMALL-MENU {width: 300px; display: inline-block; padding:20px; position: absolute; z-index: 5; left: 5px; top: 5px; height: 300px;overflow: hidden;}
+.HUGE-MENU {width: 300px; display: inline-block; padding:20px; position: absolute; z-index: 5; left: 5px; top: 5px; height: 680px;overflow: hidden;}
+.SMALL-MENU-P {background-color: #2f0054;}
+.SMALL-MENU-G {background-color: #1c3814; overflow-y: scroll;}
+.HUGE-MENU-Pi {background-color: #351935; overflow-y: scroll;}
+.MANAGE h3, .EXPLORE h3 {color: #bfbfbf; font-size: 21px;}
+.MANAGE h3 a, .EXPLORE h3 a {color: #bfbfbf; font-size: 16px;}
+.MANAGE h6 {color: #f1f1f1; font-size: 12px; font-weight: normal; line-height: 1.6;}
+.DEPLOY-ITEM {width: 100%; margin-top: 35px; color: #f1f1f1; text-align: left;}
 .DEPLOY-ITEM input {width: 100px; font-size: 13px;}
-.DEPLOY-ITEM input[type="file"] {font-size: 11px; width: 190px;}
+.DEPLOY-ITEM input[type="file"] {font-size: 11px; width: 160px;}
 .DEPLOY-ITEM input[type="number"] {width: 100px;}
-.DEPLOY-ITEM input[type="text"] {width: 100px;}
-.DEPLOY-ITEM textarea {width: 70px;}
+.DEPLOY-ITEM input[type="text"] {width: 140px;}
+.DEPLOY-ITEM input[type="color"] {width: 50px;}
+.DEPLOY-ITEM textarea {width: 140px;height: 120px;}
 .DEPLOY-ITEM input[type="radio"] {width: 12px;}
-.DEPLOY-ITEM label {width: 120px; margin-right: 10px;margin-left: 20px; font-size: 20px; font-weight: bold; display: inline-block;}
+.DEPLOY-ITEM label {width: 120px;margin-right: 5px;margin-left: 10px;vertical-align: top;font-size: 16px;margin-bottom: 10px;font-weight: bold;display: inline-block;}
 .DEPLOY-ITEM label span {font-size: 14px;}
 .DEPLOY-ITEM-end {text-align: center;}
-.DEPLOY-ITEM .deploy-btn {font-size: 14px; background-color: #ff00ff; padding: 10px 15px; display: inline-block;}
-aside {width: 300px; margin: 100px auto 20px auto; display: block; text-align: center;}
-aside h4 {color: #f1f1f1; font-weight: normal; font-size: 15px; padding: 10px 0; display: inline-block; width: 100%;}
-aside h4 a {font-weight: bolder;display: inline-block; color: #f1f1f1;}
+.DEPLOY-ITEM .deploy-btn {font-size: 13px; background-color: #8f00ff; padding: 7px 15px; display: inline-block; font-weight: bold;}
+.DEPLOY-INFO {width: 100%; display: inline-block; margin-bottom: 15px;}
+.DEPLOY-INFO p {font-size: 13px; font-weight: normal; line-height: 1.4;}
+.DEPLOY-INFO p a {font-size: 12px; font-weight: bold;color: #b8b8b8; text-decoration: underline;}
+.DEPLOY-DONATIONS {width: 100%; margin-top: -8px;}
+.DEPLOY-DONATION {width: 140px; display: inline-block; margin: 5px;}
+.DEPLOY-DONATION aside {width: 120px;display: inline-block;}
+.DEPLOY-ACTION {width: 100%; margin-top: 10px; text-align: center;}
+footer {width: 300px; margin: 50px auto 20px auto; display: block; text-align: center;}
+footer h4 {color: #f1f1f1; font-weight: normal; font-size: 15px; padding: 10px 0; display: inline-block; width: 100%;}
+footer h4 a {font-weight: bolder;display: inline-block; color: #f1f1f1;}
+.EXPLORE {width: 100%; text-align: center; display: inline-block;}
+.BALANCE-ITEM {width: 100%; height: 50px; margin: 15px 0; text-align: left;}
+.BALANCE-ITEM figure {width: 45px; height: 45px; display: inline-block;}
+.BALANCE-ITEM figure img {width: 45px; height: 45px;}
+.BALANCE-ITEM .ASSET-INFO {width: 150px; height: 60px; display: inline-block; vertical-align: top; margin: 0px 10px;}
+.BALANCE-ITEM .ASSET-INFO p {color: #ffffff;font-size: 14px;font-weight: bold; vertical-align: top; margin: 5px 0;}
+.BALANCE-ITEM .ASSET-INFO a {color: #b8b8b8;font-size: 11px;font-weight: bold; vertical-align: top; margin-top: 5px; text-decoration: underline;}
+.BALANCE-ITEM .ASSET-ACTION {width: 83px; display: inline-block;}
+.BALANCE-ITEM .ASSET-ACTION a {width: 60px; display: inline-block; font-size: 12px; text-align: center; margin-left: 10px; padding: 2px 5px; margin-bottom: 5px; background-color: #5fe084; font-weight: bold; color: #000000;}
+.BALANCE-ITEM .ASSET-ACTION .OS {background-color: #06d1da;}
+.BALANCE-LOAD {width: 100%; text-align: center; margin: 30px 0;}
+.BALANCE-LOAD .BALANCE-LOAD-FX {font-size: 13px; padding: 8px 10px; background-color: #5fe084; font-weight: bold;}
+.EXPLORE-ITEMS {width: 100%; display: inline-block;}
+.EXPLORE-SEARCH {width: 100%; height: 35px; display: inline-block; text-align: center; padding: 15px 0;}
+.EXPLORE-SEARCH input {width: 50%; display: inline-block; font-size: 16px; height: 27px;}
+.EXPLORE-SEARCH a {display: inline-block; max-width: 40%; padding: 5px 5px; font-size: 15px; font-weight: bold; margin-left: 5px; background-color:#d664dd;vertical-align: middle;}
+.EXPLORE-ITEM {width: 96%; display: inline-block; padding: 15px 1.5%; text-align: left;}
+.EXPLORE-ITEM figure {width: 45px; height: 45px; display: inline-block;}
+.EXPLORE-ITEM figure img {width: 45px; height: 45px;}
+.EXPLORE-ITEM .ASSET-INFO {width: 140px; display: inline-block; vertical-align: top; margin: 0px 8px;}
+.EXPLORE-ITEM .ASSET-INFO h4 {color: #ffffff;font-size: 13px;font-weight: bold; margin: 2px 0; vertical-align: middle;padding-top: 12px;}
+.EXPLORE-ITEM .ASSET-INFO p {display: none;}
+.EXPLORE-ITEM .ASSET-INFO a {color: #f3f3f3;font-size: 11px;font-weight: bold; vertical-align: top; margin-top: 5px; text-decoration: underline;}
+.EXPLORE-ITEM .ASSET-INFO p a {color: #b8b8b8;}
+.EXPLORE-ITEM .ASSET-ACTION {width: 83px; display: inline-block;vertical-align: top;}
+.EXPLORE-ITEM .ASSET-ACTION a {width: 60px; display: inline-block; font-size: 12px; text-align: center; margin-left: 10px; padding: 2px 5px; margin-bottom: 5px; background-color: #d664dd; font-weight: bold; color: #000000;}
+.EXPLORE-ITEM .ASSET-ACTION .OS {background-color: #06d1da;}
+.EXPLORE-ITEMS .ASSET-PAGE {display: inline-block;width: 100%;height: 30px;margin-top: 10px;}
+.EXPLORE-ITEMS .ASSET-PAGE p {color: #b8b8b8; margin: 0 15px; font-size: 13px;}
+.EXPLORE-ITEMS .ASSET-PAGE a {color: #b8b8b8; text-decoration: none; font-weight: bold;}
 
 @media only screen and (min-device-width: 500px) {
-    .DEPLOY-HEADER h2 {margin-bottom: 150px;}
-    .DEPLOY-MENU {margin-right: 20px;}
-    aside {width: 400px;}
+    .MANAGE h2 {margin-bottom: 150px;}
+    .SMALL-BOX {margin-right: 20px;}
+    .HUGE-MENU {width: 680px;}
+    .shadowPi {width: 720px;}
+    .HUGE-BOX {width: 760px;}
+    .EXPLORE-ITEM .ASSET-INFO h4 {font-size: 16px;vertical-align: top; padding-top: 0;}
+    .EXPLORE-ITEM figure {width: 60px; height: 60px; display: inline-block;}
+    .EXPLORE-ITEM figure img {width: 60px; height: 60px;}
+    .EXPLORE-ITEM .ASSET-INFO {width: 450px; margin: 0px 15px;}
+    .EXPLORE-ITEM .ASSET-INFO p {color: #ffffff;font-size: 12px; vertical-align: top; margin: 5px 0; line-height: 1.2; display: inline-block;}
+    footer {width: 400px;}
+    .HEADER .WALLET {width: 100px; height: 20px; position: fixed; right: -1px; top: 10px; background-color: #777777; text-align: right; padding: 5px 10px; border-radius: 4px; z-index: 10; display: inline-block;}
+    .HEADER .WALLET a {color: #f1f1f1; font-size: 12px; vertical-align: middle; display: inline-block; font-weight: bold; margin-right: 5px;}
+    .HEADER .WALLET figure {width: 20px; height: 20px; display: inline-block; border-radius: 50%; vertical-align: middle;}
+    .HEADER .WALLET figure img {width: 20px; height: 20px; display: inline-block; border-radius: 50%;}
 }
