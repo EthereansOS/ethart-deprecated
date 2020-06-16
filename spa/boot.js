@@ -15,6 +15,7 @@ function Boot() {
         }
     }
     ReactModuleLoader.load({
+		scripts: ['spa/style.min.css', 'spa/script.min.js'],
         modules: ['spa/' + pathName],
         callback : function() {
             ReactDOM.render(React.createElement(window[pathName.firstLetterToUpperCase()], props), document.body, callback);
