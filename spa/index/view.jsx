@@ -10,15 +10,18 @@ var Index = React.createClass({
         var _this = this;
         this.controller.upload(e.target.files[0]).catch(e => alert(e.message || e)).then(() => _this.emit('loader/toggle', false));
     },
-    render() { return (
+    render() { 
+        var _this = this;
+        return (
     <section>
         <section className="HEADER">
             <h1><img src="/assets/img/ethart-logo.png"></img><span className="LOGO-Y-2"><span className="LOGO-P">e</span>th</span><aspan className="LOGO-Pi">ar</aspan><span className="LOGO-G">t</span></h1>
             <section className="WALLET">
-                <a>0x5D40fdd..</a>
-                <figure>
-                    <img src=""></img>
-                </figure>
+                {!window.walletAddress && window.ethereum && window.ethereum.enable && <a href="javascript:;" onClick={() => window.ethereum.enable().then(() => _this.forceUpdate()).catch(() => {})}>Connect your wallet</a>}
+                {window.walletAddress && <a href="javascript:;">{window.walletAddress.substring(0, 9)}..</a>}
+                {window.walletAddress && <figure>
+                    <img src={window.makeBlockie(window.walletAddress)}></img>
+                </figure>}
             </section>
         </section>
         <section className="MANAGE">
@@ -51,7 +54,6 @@ var Index = React.createClass({
                         <Explore/>
                     </section>
             </section>
-            <input type="file" onChange={this.onChange}/>
         </section>
         <footer>
             <h4>Made with ❤️ by the <a href="https://dfohub.com" target="_Blank">DFOhub</a> team for Etherean Artists.</h4>
