@@ -118,6 +118,8 @@ footer h4 a {font-weight: bolder;display: inline-block; color: #f1f1f1;}
 .BETABANNER p a {text-decoration: underline; color: #398bf0; font-weight: bold;}
 .BETABANNER section > a {font-size: 13px; padding: 10px 15px; background-color: #398bf0; color: #ffffff; font-weight: bold; text-decoration: none; margin: 25px 30% 20px 30%; display: inline-block;}
 .BETABANNER section > a:hover {background-color: #398bf0;}
+.BETABANNER .SASSAL {width: 20px; height: 20px; position: fixed; bottom: 10px; left: 5px;}
+.BETABANNER .SASSAL img {width: 20px; height: 20px;}
 
 @media only screen and (min-device-width: 500px) {
     .MANAGE h2 {margin-bottom: 150px;}
