@@ -2,6 +2,11 @@ var Explore = React.createClass({
     componentDidMount() {
         this.controller.renderItems();
     },
+    getDefaultSubscriptions() {
+        return {
+            'ethereum/update' : this.controller.renderItems
+        }
+    },
     renderItem(it) {
         return (<section key={it.tokenId} className="EXPLORE-ITEM">
             <figure>

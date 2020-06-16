@@ -2,6 +2,11 @@ var Balance = React.createClass({
     componentDidMount() {
         this.controller.renderItems();
     },
+    getDefaultSubscriptions() {
+        return {
+            'ethereum/ping' : this.controller.renderItems
+        }
+    },
     renderItem(it) {
         return (<section key={it.tokenId} className="BALANCE-ITEM">
             <figure>

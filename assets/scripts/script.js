@@ -11,7 +11,7 @@ window.Main = async function Main() {
     if (!await window.blockchainSetup()) {
         return;
     }
-    
+    window.localStorage.ack === 'true' && window.choosePage();
 };
 
 window.newContract = function newContract(abi, address) {
@@ -158,6 +158,7 @@ window.loadContext = async function loadContext() {
 };
 
 window.choosePage = function choosePage() {
+    window.localStorage.setItem("ack", true);
     var page = undefined;
     try {
         page = window.location.pathname.split('/').join('');
