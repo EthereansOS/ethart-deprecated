@@ -45,8 +45,9 @@ li p {width: 600px; text-align: center; font-size: 18px; display: inline-block; 
 .SMALL-MENU {width: 300px; display: inline-block; padding:20px; position: absolute; z-index: 5; left: 5px; top: 5px; height: 300px;overflow: hidden;}
 .HUGE-MENU {width: 300px; display: inline-block; padding:20px; position: absolute; z-index: 5; left: 5px; top: 5px; height: 680px;overflow: hidden;}
 .SMALL-MENU-P {background-color: #2f0054;}
-.SMALL-MENU-G {background-color: #1c3814; overflow-y: scroll;}
-.HUGE-MENU-Pi {background-color: #351935; overflow-y: scroll;}
+.SMALL-MENU-G {background-color: #1c3814; overflow-y: scroll; -ms-overflow-style: none;}
+.HUGE-MENU-Pi {background-color: #351935; overflow-y: scroll; -ms-overflow-style: none;}
+.HUGE-MENU-Pi::-webkit-scrollbar, .SMALL-MENU-G::-webkit-scrollbar {display: none;}
 .MANAGE h3, .EXPLORE h3 {color: #bfbfbf; font-size: 21px;}
 .MANAGE h3 a, .EXPLORE h3 a {color: #bfbfbf; font-size: 16px;}
 .MANAGE h6 {color: #f1f1f1; font-size: 12px; font-weight: normal; line-height: 1.6;}
