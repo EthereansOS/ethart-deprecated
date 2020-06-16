@@ -9,15 +9,20 @@ li {width: 100%; display: inline-block; margin: 5px 0; text-align: center; paddi
 li span {width: 30px; text-align: center; font-size: 16px; display: inline-block; color: #f1f1f1;}
 li p {width: 600px; text-align: center; font-size: 18px; display: inline-block; font-weight: bold; color: #f1f1f1; text-align: left;}
 .loaderMinimino {border: 2px solid #f3f3f3;border-radius: 50%;border-top: 2px solid #d664dd;width: 15px !important;height: 15px !important;-webkit-animation: spin 2s linear infinite;animation: spin 2s linear infinite;display: inline-block; vertical-align: middle;}
-@-webkit-keyframes spin {0% { -webkit-transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg);}}
-@keyframes spin {0% { transform: rotate(0deg); }100% { transform: rotate(360deg);}}
-@keyframes lds-ellipsis1 {0% {transform: scale(0);}100% {transform: scale(1);}}
-@keyframes lds-ellipsis3 {0% {transform: scale(1);}100% {transform: scale(0);}}
-@keyframes lds-ellipsis2 {0% {transform: translate(0, 0);}100% {transform: translate(24px, 0);}}
-@-webkit-keyframes dash {to {stroke-dashoffset: 136;}}
-@keyframes dash {to {stroke-dashoffset: 136;}}
-@-webkit-keyframes rotate {100% {-webkit-transform: rotate(360deg);transform: rotate(360deg);}}
-@keyframes rotate {100% {-webkit-transform: rotate(360deg);transform: rotate(360deg);}}
+@keyframes ldio-wdnt6erfulc {0%, 80%, 100% { animation-timing-function: cubic-bezier(0.5,0.5,0.5,0.5) }20% { animation-timing-function: cubic-bezier(0,0.1,0.9,1) }50% { animation-timing-function: cubic-bezier(0.1,0,1,0.9) }0% { transform: scale(1) }20% { transform: scale(1) }50% { transform: scale(0.2) }80% { transform: scale(1) }100% { transform: scale(1) }}
+.ldio-wdnt6erfulc div {position: absolute;width: 30px;height: 30px;animation: ldio-wdnt6erfulc 1.333333333333333s infinite;}
+.ldio-wdnt6erfulc div:nth-child(1) {top: 5px;left: 5px;background: #398bf0;animation-delay: -0.5333333333333333s}
+.ldio-wdnt6erfulc div:nth-child(2) {top: 35px;left: 5px;background: #8f00ff;animation-delay: -0.3999999999999999s}
+.ldio-wdnt6erfulc div:nth-child(3) {top: 65px;left: 5px;background: #5fe084;animation-delay: -0.26666666666666666s}
+.ldio-wdnt6erfulc div:nth-child(4) {top: 5px;left: 35px;background: #8f00ff;animation-delay: -0.3999999999999999s}
+.ldio-wdnt6erfulc div:nth-child(5) {top: 35px;left: 35px;background: #5fe084;animation-delay: -0.26666666666666666s}
+.ldio-wdnt6erfulc div:nth-child(6) {top: 65px;left: 35px;background: #d664dd;animation-delay: -0.13333333333333333s}
+.ldio-wdnt6erfulc div:nth-child(7) {top: 5px;left: 65px;background: #5fe084;animation-delay: -0.26666666666666666s}
+.ldio-wdnt6erfulc div:nth-child(8) {top: 35px;left: 65px;background: #d664dd;animation-delay: -0.13333333333333333s}
+.ldio-wdnt6erfulc div:nth-child(9) {top: 65px;left: 65px;background: #398bf0;animation-delay: 0s}
+.loadingio-spinner-square-iyrjry8g9g9 {width: 41px;height: 41px;display: inline-block;overflow: hidden;background: none;}
+.ldio-wdnt6erfulc {width: 100%;height: 100%;position: relative;transform: translateZ(0) scale(0.41);backface-visibility: hidden;transform-origin: 0 0;}
+.ldio-wdnt6erfulc div { box-sizing: content-box; }
 .HEADER {text-align: center; margin-bottom: 50px; width: 100%; display: inline-block; position: relative;}
 .HEADER .WALLET {display: none;}
 .HEADER h1 {color: #f1f1f1; font-weight: bold; font-size: 50px; padding: 10px 0; display: inline-block; width: 100%; line-height: 2;}
@@ -105,7 +110,7 @@ footer h4 a {font-weight: bolder;display: inline-block; color: #f1f1f1;}
 .EXPLORE-ITEMS .ASSET-PAGE a {color: #b8b8b8; text-decoration: none; font-weight: bold;}
 
 .BETABANNER {position: fixed; bottom: 0; left: 0; width: 100%; height: 100%; max-height: 100%; z-index: 9999999999999999999; background-color: #000000; overflow: hidden; text-align: center; background: url("/assets/img/space.gif") no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}
-.BETABANNER section {width: 280px; display: inline-block; color: #ffffff; background-color: #00000099; border-radius: 20px; text-align: center; margin-top: 10%; padding: 10px 0;}
+.BETABANNER section {width: 280px; display: inline-block; color: #ffffff; background-color: #000000b8; border-radius: 20px; text-align: center; margin-top: 10%; padding: 10px 0;}
 .BETABANNER h2 {font-size: 20px; font-weight: bold; line-height: 1.5;}
 .BETABANNER h2 span {color: #398bf0;}
 .BETABANNER h3 {font-size: 16px; width: 85%; font-weight: bold; display: inline-block; margin: 10px auto;}
