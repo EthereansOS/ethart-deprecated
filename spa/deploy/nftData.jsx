@@ -1,16 +1,14 @@
-var Deploy = React.createClass({
-    
-    render() { return (
-        <section>
+var NftData = React.createClass({
+    render() {
+        return (<section>
             <section className="DEPLOY-INFO">
-                <label>Title:</label>
-                <input type="text"></input>
+                <label htmlFor="title">Title:</label>
+                <input id="title" type="text"></input>
             </section>
             <section className="DEPLOY-INFO">
-                <label>Description:</label>
-                <textarea type="text"></textarea>
+                <label htmlFor="description">Description:</label>
+                <textarea id="description" type="text"></textarea>
             </section>
-        </section>
-    );
+        </section>);
     }
 });

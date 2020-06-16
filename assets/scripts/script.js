@@ -182,11 +182,12 @@ window.getData = function getData(root, checkValidation) {
     children.length === 0 && (children = root.children('input,select,textarea'));
     children.each(function(i, input) {
         var id = input.id || i;
-        input.type && input.type !== 'checkbox' && (data[id] = input.value.split(' ').join(''));
+        input.type && input.type !== 'checkbox' && (data[id] = input.value);
         input.type === 'number' && (data[id] = parseFloat(data[id]));
         input.type === 'number' && isNaN(data[id]) && (data[id] = parseFloat(input.dataset.defaultValue));
-        input.type === 'checkbox' && (data[id] = input.checked);
+        (input.type === 'checkbox' || input.type === 'radio') && (data[id] = input.checked);
         !input.type || input.type === 'hidden' && (data[id] = $(input).val());
+        input.type === 'file' && (data[id] = input.files);
         if (checkValidation) {
             if (!data[id]) {
                 throw "Data is mandatory";
@@ -207,8 +208,9 @@ window.setData = function setData(root, data) {
     children.length === 0 && (children = root.children('input,select,textarea'));
     children.each(function(i, input) {
         var id = input.id || i;
-        input.type && input.type !== 'checkbox' && $(input).val(data[id]);
-        input.type && input.type === 'checkbox' && (input.checked = data[id] === true);
+        !input.type || input.type !== 'checkbox' && input.type !== 'radio' && input.type !== 'file' && $(input).val(data[id]);
+        input.type && (input.type === 'checkbox' || input.type === 'radio') && (input.checked = data[id] === true);
+        input.type === 'file' && (input.files = data[id]);
     });
 };
 
@@ -999,4 +1001,61 @@ window.dumpFunctionalities = async function dumpFunctionalities(dfo) {
     var entries = ["        IMVDFunctionalitiesManager functionalitiesManager = IMVDFunctionalitiesManager(address(0));"];
     entries.push(...Object.values(dfo.functionalities).map(it => `functionalitiesManager.addFunctionality("${it.codeName}", ${window.web3.utils.toChecksumAddress(it.sourceLocation)}, ${it.sourceLocationId}, ${window.web3.utils.toChecksumAddress(it.location)}, ${it.submitable}, "${it.methodSignature}", '${JSON.stringify(it.returnAbiParametersArray)}', ${it.isInternal}, ${it.needsSender});`));
     return entries.join('\n        ');
+};
+
+window.shortenWord = function shortenWord(word, charsAmount) {
+    return word.substring(0, word.length < (charsAmount = charsAmount || 20) ? word.length : charsAmount) + (word.length < charsAmount ? '' : '...');
+};
+
+window.toStateHolderKey = function stateHolderKey(a, b, c) {
+    a !== undefined && a !== null && (typeof a).toLowerCase() !== 'string' && (a = '' + a);
+    b !== undefined && b !== null && (typeof b).toLowerCase() !== 'string' && (b = '' + b);
+    c !== undefined && c !== null && (typeof b).toLowerCase() !== 'string' && (c = '' + c);
+    return [
+        a,
+        !a || !b ? "" : "_",
+        b,
+        (!a && !b) || !c ? "" : "_",
+        c
+    ].join('').toLowerCase();
+};
+
+window.AJAXRequest = function AJAXRequest(link, timeout, toU) {
+    var toUpload = toU !== undefined && toU !== null && typeof toU !== 'string' ? JSON.stringify(toU) : toU;
+    var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    return new Promise(function(ok, ko) {
+        var going = true;
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                if (going) {
+                    going = false;
+                    var response = xmlhttp.responseText;
+                    try {
+                        response = JSON.parse(response);
+                    } catch(e) {
+                    }
+                    ok(response);
+                }
+                try {
+                    xmlhttp.abort();
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+        }
+        xmlhttp.open(toUpload ? 'POST' : 'GET', link + (link.indexOf('?') === -1 ? '?' : '&') + ('cached_' + new Date().getTime()) + '=' + (new Date().getTime()));
+        toUpload ? xmlhttp.send(toUpload) : xmlhttp.send();
+        (timeout !== undefined && timeout !== null) && setTimeout(function() {
+            if (!going) {
+                return;
+            }
+            going = false;
+            try {
+                xmlhttp.abort();
+            } catch (e) {
+                console.error(e);
+            }
+            ko();
+        }, timeout);
+    });
 };
