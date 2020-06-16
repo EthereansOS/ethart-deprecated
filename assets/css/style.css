@@ -22,7 +22,7 @@ li p {width: 600px; text-align: center; font-size: 18px; display: inline-block; 
 .HEADER .WALLET {display: none;}
 .HEADER h1 {color: #f1f1f1; font-weight: bold; font-size: 50px; padding: 10px 0; display: inline-block; width: 100%; line-height: 2;}
 .HEADER h1 img {width: 100px;height: 22px; margin-right: 10px;vertical-align: middle;}
-.HEADER h1 .LOGO-Y-2 {border-bottom: 5px solid #06d1da;}
+.HEADER h1 .LOGO-Y-2 {border-bottom: 5px solid #398bf0;}
 .HEADER h1 .LOGO-P {border-top: 5px solid #8f00ff;}
 .HEADER h1 .LOGO-G {border-bottom: 5px solid #5fe084;}
 .HEADER h1 .LOGO-Pi {border-top: 5px solid #d664dd;}
@@ -81,13 +81,13 @@ footer h4 a {font-weight: bolder;display: inline-block; color: #f1f1f1;}
 .BALANCE-ITEM .ASSET-INFO a {color: #b8b8b8;font-size: 11px;font-weight: bold; vertical-align: top; margin-top: 5px; text-decoration: underline;}
 .BALANCE-ITEM .ASSET-ACTION {width: 83px; display: inline-block;}
 .BALANCE-ITEM .ASSET-ACTION a {width: 60px; display: inline-block; font-size: 12px; text-align: center; margin-left: 10px; padding: 2px 5px; margin-bottom: 5px; background-color: #5fe084; font-weight: bold; color: #000000;}
-.BALANCE-ITEM .ASSET-ACTION .OS {background-color: #06d1da;}
+.BALANCE-ITEM .ASSET-ACTION .OS {background-color: #398bf0; color: #f1f1f1;}
 .BALANCE-LOAD {width: 100%; text-align: center; margin: 30px 0;}
 .BALANCE-LOAD .BALANCE-LOAD-FX {font-size: 13px; padding: 8px 10px; background-color: #5fe084; font-weight: bold;}
 .EXPLORE-ITEMS {width: 100%; display: inline-block;}
 .EXPLORE-SEARCH {width: 100%; height: 35px; display: inline-block; text-align: center; padding: 15px 0;}
 .EXPLORE-SEARCH input {width: 50%; display: inline-block; font-size: 16px; height: 27px;}
-.EXPLORE-SEARCH a {display: inline-block; max-width: 40%; padding: 5px 5px; font-size: 15px; font-weight: bold; margin-left: 5px; background-color:#d664dd;vertical-align: middle;}
+.EXPLORE-SEARCH a {display: inline-block; max-width: 40%; padding: 5px 5px; font-size: 15px; font-weight: bold; margin-left: 5px; background-color:#d664dd;vertical-align: middle; color: #f1f1f1;}
 .EXPLORE-ITEM {width: 96%; display: inline-block; padding: 15px 1.5%; text-align: left;}
 .EXPLORE-ITEM figure {width: 45px; height: 45px; display: inline-block;}
 .EXPLORE-ITEM figure img {width: 45px; height: 45px;}
@@ -97,11 +97,16 @@ footer h4 a {font-weight: bolder;display: inline-block; color: #f1f1f1;}
 .EXPLORE-ITEM .ASSET-INFO a {color: #f3f3f3;font-size: 11px;font-weight: bold; vertical-align: top; margin-top: 5px; text-decoration: underline;}
 .EXPLORE-ITEM .ASSET-INFO p a {color: #b8b8b8;}
 .EXPLORE-ITEM .ASSET-ACTION {width: 83px; display: inline-block;vertical-align: top;}
-.EXPLORE-ITEM .ASSET-ACTION a {width: 60px; display: inline-block; font-size: 12px; text-align: center; margin-left: 10px; padding: 2px 5px; margin-bottom: 5px; background-color: #d664dd; font-weight: bold; color: #000000;}
-.EXPLORE-ITEM .ASSET-ACTION .OS {background-color: #06d1da;}
+.EXPLORE-ITEM .ASSET-ACTION a {width: 60px; display: inline-block; font-size: 12px; text-align: center; margin-left: 10px; padding: 2px 5px; margin-bottom: 5px; background-color: #d664dd; font-weight: bold; color: #f1f1f1;}
+.EXPLORE-ITEM .ASSET-ACTION .OS {background-color: #398bf0;}
 .EXPLORE-ITEMS .ASSET-PAGE {display: inline-block;width: 100%;height: 30px;margin-top: 10px;}
 .EXPLORE-ITEMS .ASSET-PAGE p {color: #b8b8b8; margin: 0 15px; font-size: 13px;}
 .EXPLORE-ITEMS .ASSET-PAGE a {color: #b8b8b8; text-decoration: none; font-weight: bold;}
+.NoWeb3 .DisclamerWeb3 {width: 100%; text-align: center; display: inline-block; margin: 300px auto;}
+.NoWeb3 .DisclamerWeb3 h2 {font-size: 20px;font-weight: bold;color: #f1f1f1;}
+.NoWeb3 .DisclamerWeb3 p {font-size: 16px; color: #f1f1f1; line-height: 1.4;}
+.NoWeb3 .DisclamerWeb3 p a {font-size: 15px; color: #ff00ff; font-weight: bold; padding: 0 3px;}
+.NoWeb3 .DisclamerWeb3 p a:hover {color: #ffffff; background-color: #ff00ff; text-decoration: none;}
 
 @media only screen and (min-device-width: 500px) {
     .MANAGE h2 {margin-bottom: 150px;}
