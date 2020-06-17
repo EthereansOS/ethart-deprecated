@@ -137,7 +137,7 @@ footer h4 a {font-weight: bolder;display: inline-block; }
     .EXPLORE-ITEM figure img {width: 60px; height: 60px;}
     .EXPLORE-ITEM .ASSET-INFO {width: 450px; margin: 0px 15px;}
     .EXPLORE-ITEM .ASSET-INFO p {font-size: 12px; vertical-align: top; margin: 5px 0; line-height: 1.2; display: inline-block;}
-    footer {width: 400px;}
+    footer {width: 450px;}
     .HEADER .WALLET {width: 100px; height: 20px; position: fixed; right: -1px; top: 10px; background-color: #777777; text-align: right; padding: 5px 10px; border-radius: 4px; z-index: 10; display: inline-block;}
     .HEADER .WALLET a { font-size: 12px; vertical-align: middle; display: inline-block; font-weight: bold; margin-right: 5px;}
     .HEADER .WALLET figure {width: 20px; height: 20px; display: inline-block; border-radius: 50%; vertical-align: middle;}
