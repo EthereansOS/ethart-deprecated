@@ -17,7 +17,7 @@ var Explore = React.createClass({
                 <p>{it.description ? window.shortenWord(it.description, 150) : "No description"}</p>
             </section>
             <section className="ASSET-ACTION">
-                <a href={this.state.etherscanLink + it.tokenId} target="_blank">Etherscan</a>
+                <a className="OS" href={this.state.etherscanLink + it.tokenId} target="_blank">Etherscan</a>
                 <a className="OS" target="_blank" href={this.state.openSeaLink + it.tokenId}>OpenSea</a>
             </section>
         </section>);

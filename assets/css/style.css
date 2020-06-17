@@ -3,7 +3,7 @@ h1,h4,h3,h6,h2 {margin-block-end: 0;margin-block-start: 0;}
 body {width: 100%; position: relative; margin: 0; font-family: Helvetica Neue,Helvetica,Arial,メイリオ\, meiryo,ヒラギノ角ゴ pro w3,hiragino kaku gothic pro,sans-serif;}
 ol,ul, li {margin-block-start: 0; margin-block-end: 0; list-style-type: none; padding-inline-start:0;}
 p {display: inline-block;margin-block-start: 0px;margin-block-end: 0px;margin-inline-start: 0px;margin-inline-end: 0px;}
-p, h1, h2, h3, h4, h5, h6, a, label {color: #f1f1f1;}
+p, h1, h2, h3, h4, h5, h6, a, label, aside {color: #f1f1f1;}
 figure {margin-block-start: 0;margin-block-end: 0;margin-inline-start: 0px;margin-inline-end: 0px;}
 .ldio-wdnt6erfulc div {position: absolute;width: 30px;height: 30px;animation: ldio-wdnt6erfulc 1.333333333333333s infinite;}
 .ldio-wdnt6erfulc div:nth-child(1) {top: 5px;left: 5px;background: #398bf0;animation-delay: -0.5333333333333333s}
@@ -18,6 +18,14 @@ figure {margin-block-start: 0;margin-block-end: 0;margin-inline-start: 0px;margi
 .loadingio-spinner-square-iyrjry8g9g9 {width: 41px;height: 41px;display: inline-block;overflow: hidden;background: none;}
 .ldio-wdnt6erfulc {width: 100%;height: 100%;position: relative;transform: translateZ(0) scale(0.41);backface-visibility: hidden;transform-origin: 0 0;}
 .ldio-wdnt6erfulc div { box-sizing: content-box; }
+@keyframes ldio-2it1sjbil3o { 0% {top: 83.19px;left: 83.19px;width: 0;height: 0;opacity: 1; } 100% {top: 2.6550000000000002px;left: 2.6550000000000002px;width: 161.07px;height: 161.07px;opacity: 0;}}
+.ldio-2it1sjbil3o div {position: absolute;border-width: 5.3100000000000005px;border-style: solid;opacity: 1;border-radius: 50%;animation: ldio-2it1sjbil3o 1.36986301369863s cubic-bezier(0,0.2,0.8,1) infinite;}
+.ldio-2it1sjbil3o div:nth-child(1) {border-color: #8f00ff}
+.ldio-2it1sjbil3o div:nth-child(2) {border-color: #5fe084;animation-delay: -0.684931506849315s;}
+.loadingio-spinner-ripple-6l4nh0xpwdg {width: 177px;height: 177px;display: inline-block;overflow: hidden;background: none;}
+.ldio-2it1sjbil3o {width: 100%;height: 100%;position: relative;transform: translateZ(0) scale(1);backface-visibility: hidden;transform-origin: 0 0;}
+.ldio-2it1sjbil3o div { box-sizing: content-box; }
+
 .HEADER {text-align: center; margin-bottom: 50px; width: 100%; display: inline-block; position: relative;}
 .HEADER .WALLET {display: none;}
 .HEADER h1 { font-weight: bold; font-size: 50px; padding: 10px 0; display: inline-block; width: 100%; line-height: 2;}
@@ -52,7 +60,7 @@ figure {margin-block-start: 0;margin-block-end: 0;margin-inline-start: 0px;margi
 .MANAGE h6 { font-size: 12px; font-weight: normal; line-height: 1.6;}
 .DEPLOY-ITEM {width: 100%; margin-top: 20px;  text-align: left;}
 .DEPLOY-ITEM input {width: 100px; font-size: 13px;}
-.DEPLOY-ITEM input[type="file"] {font-size: 11px; width: 160px;}
+.DEPLOY-ITEM input[type="file"] {font-size: 11px; width: 160px; color: #f1f1f1;}
 .DEPLOY-ITEM input[type="number"] {width: 100px;}
 .DEPLOY-ITEM input[type="text"] {width: 140px;}
 .DEPLOY-ITEM input[type="color"] {width: 50px;}
@@ -74,12 +82,11 @@ footer h4 { font-weight: normal; font-size: 15px; padding: 10px 0; display: inli
 footer h4 a {font-weight: bolder;display: inline-block; }
 .EXPLORE {width: 100%; text-align: center; display: inline-block;}
 .BALANCE-ITEM {width: 100%; height: 50px; margin: 15px 0; text-align: left;}
-.BALANCE-ITEM figure {width: 45px; height: 45px; display: inline-block; vertical-align: middle;}
-.BALANCE-ITEM figure img {width: 45px; height: 45px;}
-.BALANCE-ITEM .ASSET-INFO {width: 150px; height: 60px; display: inline-block; vertical-align: middle; margin: 0px 10px;}
-.BALANCE-ITEM .ASSET-INFO p {font-size: 14px;font-weight: bold; vertical-align: top; margin: 5px 0;}
-.BALANCE-ITEM .ASSET-INFO a {color: #b8b8b8;font-size: 11px;font-weight: bold; vertical-align: top; margin-top: 5px; text-decoration: underline;}
-.BALANCE-ITEM .ASSET-ACTION {width: 83px; display: inline-block; vertical-align: bottom;}
+.BALANCE-ITEM figure {width: 40px; height: 40px; display: inline-block; vertical-align: middle;}
+.BALANCE-ITEM figure img {width: 40px; height: 40px;}
+.BALANCE-ITEM .ASSET-INFO {width: 150px; height: 40px; display: inline-block; vertical-align: top; margin: 0px 10px;}
+.BALANCE-ITEM .ASSET-INFO p {font-size: 14px;font-weight: bold; vertical-align: middle; margin: 5px 0;}
+.BALANCE-ITEM .ASSET-ACTION {width: 83px; display: inline-block; vertical-align: middle;}
 .BALANCE-ITEM .ASSET-ACTION a {width: 60px; display: inline-block; font-size: 12px; text-align: center; margin-left: 10px; padding: 2px 5px; margin-bottom: 5px; background-color: #5fe084; font-weight: bold;  text-decoration: none;}
 .BALANCE-ITEM .ASSET-ACTION .OS {background-color: #398bf0; }
 .BALANCE-LOAD {width: 100%; text-align: center; margin: 30px 0;}
@@ -103,7 +110,6 @@ footer h4 a {font-weight: bolder;display: inline-block; }
 .EXPLORE-ITEMS .ASSET-PAGE p {color: #b8b8b8; margin: 0 15px; font-size: 13px;}
 .EXPLORE-ITEMS .ASSET-PAGE a {color: #b8b8b8; text-decoration: none; font-weight: bold;}
 .DISCLAMER {font-size: 12px; font-weight: bold; }
-
 .BETABANNER {position: fixed; bottom: 0; left: 0; width: 100%; height: 100%; max-height: 100%; z-index: 9999999999999999999; background-color: #000000; overflow: hidden; text-align: center; background: url("/assets/img/space.gif") no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}
 .BETABANNER section {width: 280px; display: inline-block;  background-color: #000000b8; border-radius: 20px; text-align: center; margin-top: 10%; padding: 10px 0;}
 .BETABANNER h2 {font-size: 20px; font-weight: bold; line-height: 1.5;}
