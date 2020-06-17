@@ -25,9 +25,12 @@ var Deploy = React.createClass({
     },
     deploy(e) {
         e && e.preventDefault && e.preventDefault() && e.stopPropagation && e.stopPropagation();
-        this.emit('loader/toggle', true);
+        this.emit('loader/show');
         var _this = this;
-        this.controller.deploy(this.dumpData()).catch(e => alert(e.message || e)).then(() => _this.emit('loader/toggle', false));
+        this.controller.deploy(this.dumpData()).catch(e => {
+            alert(e.message || e);
+            _this.emit('loader/hide');
+        });
     },
     changePage(num) {
         num > 0 && this.dumpData();

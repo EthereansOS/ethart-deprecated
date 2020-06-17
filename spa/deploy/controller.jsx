@@ -13,22 +13,25 @@ var DeployController = function (view) {
             background_color: data.background
         };
         var metadataLink = await window.DocumentsUploaderProvider.upload(metadata);
-        var metadataHash = window.web3.utils.sha3(JSON.stringify(metadata));
-        var rootId = context.view.state.rootId || 0;
-        var onChain = data.onchain === true;
-        var value = window.web3.utils.toWei(context.getDonation(data), 'ether');
-        value = parseInt(value) === 0 ? undefined : value;
-        var block = await window.web3.eth.getBlockNumber();
-        for (var i in chunks) {
-            var result = await window.ethArt.mint(value, metadataLink, metadataHash, onChain ? chunks[i] : '0x', !onChain || parseInt(i) === chunks.length - 1, rootId);
-            if (!rootId) {
-                var logs = await window.ethArt.getPastLogs({ event: "Minted(address_indexed,address,uint256,uint256)", fromBlock: block });
-                rootId = parseInt(logs[0].data[1]);
+        context.view.emit('loader/propagate', metadataLink, async function() {
+            var metadataHash = window.web3.utils.sha3(JSON.stringify(metadata));
+            var rootId = context.view.state.rootId || 0;
+            var onChain = data.onchain === true;
+            var value = window.web3.utils.toWei(context.getDonation(data), 'ether');
+            value = parseInt(value) === 0 ? undefined : value;
+            var block = await window.web3.eth.getBlockNumber();
+            for (var i in chunks) {
+                var result = await window.ethArt.mint(value, metadataLink, metadataHash, onChain ? chunks[i] : '0x', !onChain || parseInt(i) === chunks.length - 1, rootId);
+                if (!rootId) {
+                    var logs = await window.ethArt.getPastLogs({ event: "Minted(address_indexed,address,uint256,uint256)", fromBlock: block });
+                    rootId = parseInt(logs[0].data[1]);
+                }
+                if (!onChain) {
+                    break;
+                }
             }
-            if (!onChain) {
-                break;
-            }
-        }
+            context.view.emit('loader/hide');
+        });
     };
 
     context.getDonation = function getDonation(data) {
