@@ -50,6 +50,7 @@ var Index = React.createClass({
             </section>
             <footer>
                 <h4>Made with ❤️ by the <a href="https://dfohub.com" target="_Blank">DFOhub</a> team for Etherean Artists.</h4>
+                <p className="DISCLAMER">Every on-chain file is available to everyone, be careful to don't transact personal data. Ethereum and IPFS power everything here. Whatever action you take, you have full responsibility.</p>
             </footer>
         </section>);
     }

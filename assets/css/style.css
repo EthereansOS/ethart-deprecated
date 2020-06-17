@@ -3,13 +3,8 @@ h1,h4,h3,h6,h2 {margin-block-end: 0;margin-block-start: 0;}
 body {width: 100%; position: relative; margin: 0; font-family: Helvetica Neue,Helvetica,Arial,メイリオ\, meiryo,ヒラギノ角ゴ pro w3,hiragino kaku gothic pro,sans-serif;}
 ol,ul, li {margin-block-start: 0; margin-block-end: 0; list-style-type: none; padding-inline-start:0;}
 p {display: inline-block;margin-block-start: 0px;margin-block-end: 0px;margin-inline-start: 0px;margin-inline-end: 0px;}
+p, h1, h2, h3, h4, h5, h6, a, label {color: #f1f1f1;}
 figure {margin-block-start: 0;margin-block-end: 0;margin-inline-start: 0px;margin-inline-end: 0px;}
-ul {width: 900px; margin: 10px auto 10px auto;}
-li {width: 100%; display: inline-block; margin: 5px 0; text-align: center; padding: 5px 0;}
-li span {width: 30px; text-align: center; font-size: 16px; display: inline-block; color: #f1f1f1;}
-li p {width: 600px; text-align: center; font-size: 18px; display: inline-block; font-weight: bold; color: #f1f1f1; text-align: left;}
-.loaderMinimino {border: 2px solid #f3f3f3;border-radius: 50%;border-top: 2px solid #d664dd;width: 15px !important;height: 15px !important;-webkit-animation: spin 2s linear infinite;animation: spin 2s linear infinite;display: inline-block; vertical-align: middle;}
-@keyframes ldio-wdnt6erfulc {0%, 80%, 100% { animation-timing-function: cubic-bezier(0.5,0.5,0.5,0.5) }20% { animation-timing-function: cubic-bezier(0,0.1,0.9,1) }50% { animation-timing-function: cubic-bezier(0.1,0,1,0.9) }0% { transform: scale(1) }20% { transform: scale(1) }50% { transform: scale(0.2) }80% { transform: scale(1) }100% { transform: scale(1) }}
 .ldio-wdnt6erfulc div {position: absolute;width: 30px;height: 30px;animation: ldio-wdnt6erfulc 1.333333333333333s infinite;}
 .ldio-wdnt6erfulc div:nth-child(1) {top: 5px;left: 5px;background: #398bf0;animation-delay: -0.5333333333333333s}
 .ldio-wdnt6erfulc div:nth-child(2) {top: 35px;left: 5px;background: #8f00ff;animation-delay: -0.3999999999999999s}
@@ -25,7 +20,7 @@ li p {width: 600px; text-align: center; font-size: 18px; display: inline-block; 
 .ldio-wdnt6erfulc div { box-sizing: content-box; }
 .HEADER {text-align: center; margin-bottom: 50px; width: 100%; display: inline-block; position: relative;}
 .HEADER .WALLET {display: none;}
-.HEADER h1 {color: #f1f1f1; font-weight: bold; font-size: 50px; padding: 10px 0; display: inline-block; width: 100%; line-height: 2;}
+.HEADER h1 { font-weight: bold; font-size: 50px; padding: 10px 0; display: inline-block; width: 100%; line-height: 2;}
 .HEADER h1 img {width: 100px;height: 22px; margin-right: 10px;vertical-align: middle;}
 .HEADER h1 .LOGO-Y-2 {border-bottom: 5px solid #398bf0;}
 .HEADER h1 .LOGO-P {border-top: 5px solid #8f00ff;}
@@ -49,14 +44,13 @@ li p {width: 600px; text-align: center; font-size: 18px; display: inline-block; 
 .shadowPi3 {top: 14px; left: 14px;}
 .SMALL-MENU {width: 300px; display: inline-block; padding:20px; position: absolute; z-index: 5; left: 5px; top: 5px; height: 300px;overflow: hidden;}
 .HUGE-MENU {width: 300px; display: inline-block; padding:20px; position: absolute; z-index: 5; left: 5px; top: 5px; height: 590px;overflow: hidden;}
-.SMALL-MENU-P {background-color: #292929;}
-.SMALL-MENU-G {background-color: #292929; overflow-y: scroll; -ms-overflow-style: none;}
-.HUGE-MENU-Pi {background-color: #292929; overflow-y: scroll; -ms-overflow-style: none;}
+.SMALL-MENU-P, .SMALL-MENU-G, .HUGE-MENU-Pi {background-color: #041929;}
+.SMALL-MENU-G {overflow-y: scroll; -ms-overflow-style: none;}
 .HUGE-MENU-Pi::-webkit-scrollbar, .SMALL-MENU-G::-webkit-scrollbar {display: none;}
 .MANAGE h3, .EXPLORE h3 {color: #bfbfbf; font-size: 21px;}
 .MANAGE h3 a, .EXPLORE h3 a {color: #bfbfbf; font-size: 16px;}
-.MANAGE h6 {color: #f1f1f1; font-size: 12px; font-weight: normal; line-height: 1.6;}
-.DEPLOY-ITEM {width: 100%; margin-top: 20px; color: #f1f1f1; text-align: left;}
+.MANAGE h6 { font-size: 12px; font-weight: normal; line-height: 1.6;}
+.DEPLOY-ITEM {width: 100%; margin-top: 20px;  text-align: left;}
 .DEPLOY-ITEM input {width: 100px; font-size: 13px;}
 .DEPLOY-ITEM input[type="file"] {font-size: 11px; width: 160px;}
 .DEPLOY-ITEM input[type="number"] {width: 100px;}
@@ -67,56 +61,57 @@ li p {width: 600px; text-align: center; font-size: 18px; display: inline-block; 
 .DEPLOY-ITEM label {width: 120px;margin-right: 5px;margin-left: 10px;vertical-align: top;font-size: 16px;margin-bottom: 10px;font-weight: bold;display: inline-block;}
 .DEPLOY-ITEM label span {font-size: 14px;}
 .DEPLOY-ITEM-end {text-align: center;}
-.DEPLOY-ITEM .deploy-btn {font-size: 13px; background-color: #8f00ff; padding: 7px 15px; display: inline-block; font-weight: bold;margin: 5px;color: #ffffff;text-decoration: none;}
+.DEPLOY-ITEM .deploy-btn {font-size: 13px; background-color: #8f00ff; padding: 7px 15px; display: inline-block; font-weight: bold;margin: 5px;text-decoration: none;}
 .DEPLOY-INFO {width: 100%; display: inline-block; margin-bottom: 15px;}
 .DEPLOY-INFO p {font-size: 13px; font-weight: normal; line-height: 1.4;margin-top: 5px;padding-left: 30px;}
 .DEPLOY-INFO p a {font-size: 12px; font-weight: bold;color: #b8b8b8; text-decoration: underline;}
 .DEPLOY-DONATIONS {width: 100%; margin-top: -8px;}
 .DEPLOY-DONATION {width: 140px; display: inline-block; margin: 5px;}
 .DEPLOY-DONATION aside {width: 120px;display: inline-block;}
-.DEPLOY-ACTION {width: 100%;text-align: center;}
+.DEPLOY-ACTION {width: 100%;text-align: center;position: absolute;bottom: 10px;left: 0;}
 footer {width: 300px; margin: 50px auto 20px auto; display: block; text-align: center;}
-footer h4 {color: #f1f1f1; font-weight: normal; font-size: 15px; padding: 10px 0; display: inline-block; width: 100%;}
-footer h4 a {font-weight: bolder;display: inline-block; color: #f1f1f1;}
+footer h4 { font-weight: normal; font-size: 15px; padding: 10px 0; display: inline-block; width: 100%;}
+footer h4 a {font-weight: bolder;display: inline-block; }
 .EXPLORE {width: 100%; text-align: center; display: inline-block;}
 .BALANCE-ITEM {width: 100%; height: 50px; margin: 15px 0; text-align: left;}
 .BALANCE-ITEM figure {width: 45px; height: 45px; display: inline-block; vertical-align: middle;}
 .BALANCE-ITEM figure img {width: 45px; height: 45px;}
 .BALANCE-ITEM .ASSET-INFO {width: 150px; height: 60px; display: inline-block; vertical-align: middle; margin: 0px 10px;}
-.BALANCE-ITEM .ASSET-INFO p {color: #ffffff;font-size: 14px;font-weight: bold; vertical-align: top; margin: 5px 0;}
+.BALANCE-ITEM .ASSET-INFO p {font-size: 14px;font-weight: bold; vertical-align: top; margin: 5px 0;}
 .BALANCE-ITEM .ASSET-INFO a {color: #b8b8b8;font-size: 11px;font-weight: bold; vertical-align: top; margin-top: 5px; text-decoration: underline;}
 .BALANCE-ITEM .ASSET-ACTION {width: 83px; display: inline-block; vertical-align: bottom;}
-.BALANCE-ITEM .ASSET-ACTION a {width: 60px; display: inline-block; font-size: 12px; text-align: center; margin-left: 10px; padding: 2px 5px; margin-bottom: 5px; background-color: #5fe084; font-weight: bold; color: #f1f1f1; text-decoration: none;}
-.BALANCE-ITEM .ASSET-ACTION .OS {background-color: #398bf0; color: #f1f1f1;}
+.BALANCE-ITEM .ASSET-ACTION a {width: 60px; display: inline-block; font-size: 12px; text-align: center; margin-left: 10px; padding: 2px 5px; margin-bottom: 5px; background-color: #5fe084; font-weight: bold;  text-decoration: none;}
+.BALANCE-ITEM .ASSET-ACTION .OS {background-color: #398bf0; }
 .BALANCE-LOAD {width: 100%; text-align: center; margin: 30px 0;}
-.BALANCE-LOAD .BALANCE-LOAD-FX {font-size: 13px; padding: 8px 10px; background-color: #5fe084; font-weight: bold;color: #ffffff;text-decoration: none;}
+.BALANCE-LOAD .BALANCE-LOAD-FX {font-size: 13px; padding: 8px 10px; background-color: #5fe084; font-weight: bold;text-decoration: none;}
 .EXPLORE-ITEMS {width: 100%; display: inline-block;}
 .EXPLORE-SEARCH {width: 100%; height: 35px; display: inline-block; text-align: center; padding: 15px 0;}
 .EXPLORE-SEARCH input {width: 50%; display: inline-block; font-size: 16px; height: 27px;}
-.EXPLORE-SEARCH a {display: inline-block; max-width: 40%; padding: 5px 5px; font-size: 15px; font-weight: bold; margin-left: 5px; background-color:#d664dd;vertical-align: middle; color: #f1f1f1;}
+.EXPLORE-SEARCH a {display: inline-block; max-width: 40%; padding: 5px 5px; font-size: 15px; font-weight: bold; margin-left: 5px; background-color:#d664dd;vertical-align: middle; text-decoration: none;}
 .EXPLORE-ITEM {width: 96%; display: inline-block; padding: 15px 1.5%; text-align: left;}
 .EXPLORE-ITEM figure {width: 45px; height: 45px; display: inline-block;}
 .EXPLORE-ITEM figure img {width: 45px; height: 45px;}
 .EXPLORE-ITEM .ASSET-INFO {width: 140px; display: inline-block; vertical-align: top; margin: 0px 8px;}
-.EXPLORE-ITEM .ASSET-INFO h4 {color: #ffffff;font-size: 13px;font-weight: bold; margin: 2px 0; vertical-align: middle;padding-top: 12px;}
+.EXPLORE-ITEM .ASSET-INFO h4 {font-size: 13px;font-weight: bold; margin: 2px 0; vertical-align: middle;padding-top: 12px;}
 .EXPLORE-ITEM .ASSET-INFO p {display: none;}
 .EXPLORE-ITEM .ASSET-INFO a {color: #f3f3f3;font-size: 11px;font-weight: bold; vertical-align: top; margin-top: 5px; text-decoration: underline;}
 .EXPLORE-ITEM .ASSET-INFO p a {color: #b8b8b8;}
 .EXPLORE-ITEM .ASSET-ACTION {width: 83px; display: inline-block;vertical-align: top;}
-.EXPLORE-ITEM .ASSET-ACTION a {width: 60px; display: inline-block; font-size: 12px; text-align: center; margin-left: 10px; padding: 2px 5px; margin-bottom: 5px; background-color: #d664dd; font-weight: bold; color: #f1f1f1;}
+.EXPLORE-ITEM .ASSET-ACTION a {width: 60px; display: inline-block; font-size: 12px; text-align: center; margin-left: 10px; padding: 2px 5px; margin-bottom: 5px; background-color: #d664dd; font-weight: bold;  text-decoration: none;}
 .EXPLORE-ITEM .ASSET-ACTION .OS {background-color: #398bf0;}
 .EXPLORE-ITEMS .ASSET-PAGE {display: inline-block;width: 100%;height: 30px;margin-top: 10px;position: absolute;bottom: 20px;left: 0px;}
 .EXPLORE-ITEMS .ASSET-PAGE p {color: #b8b8b8; margin: 0 15px; font-size: 13px;}
 .EXPLORE-ITEMS .ASSET-PAGE a {color: #b8b8b8; text-decoration: none; font-weight: bold;}
+.DISCLAMER {font-size: 12px; font-weight: bold; }
 
 .BETABANNER {position: fixed; bottom: 0; left: 0; width: 100%; height: 100%; max-height: 100%; z-index: 9999999999999999999; background-color: #000000; overflow: hidden; text-align: center; background: url("/assets/img/space.gif") no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}
-.BETABANNER section {width: 280px; display: inline-block; color: #ffffff; background-color: #000000b8; border-radius: 20px; text-align: center; margin-top: 10%; padding: 10px 0;}
+.BETABANNER section {width: 280px; display: inline-block;  background-color: #000000b8; border-radius: 20px; text-align: center; margin-top: 10%; padding: 10px 0;}
 .BETABANNER h2 {font-size: 20px; font-weight: bold; line-height: 1.5;}
 .BETABANNER h2 span {color: #398bf0;}
 .BETABANNER h3 {font-size: 16px; width: 85%; font-weight: bold; display: inline-block; margin: 10px auto;}
 .BETABANNER p {font-size: 12px; line-height: 1.3; width: 75%;display: inline-block; margin: 10px auto; font-weight: bold;}
 .BETABANNER p a {text-decoration: underline; color: #398bf0; font-weight: bold;}
-.BETABANNER section > a {font-size: 13px; padding: 10px 15px; background-color: #398bf0; color: #ffffff; font-weight: bold; text-decoration: none; margin: 25px 30% 20px 30%; display: inline-block;}
+.BETABANNER section > a {font-size: 13px; padding: 10px 15px; background-color: #398bf0;  font-weight: bold; text-decoration: none; margin: 25px 30% 20px 30%; display: inline-block;}
 .BETABANNER section > a:hover {background-color: #398bf0;}
 .BETABANNER .SASSAL {width: 20px; height: 20px; position: fixed; bottom: 10px; left: 5px;}
 .BETABANNER .SASSAL img {width: 20px; height: 20px;}
@@ -135,10 +130,10 @@ footer h4 a {font-weight: bolder;display: inline-block; color: #f1f1f1;}
     .EXPLORE-ITEM figure {width: 60px; height: 60px; display: inline-block;}
     .EXPLORE-ITEM figure img {width: 60px; height: 60px;}
     .EXPLORE-ITEM .ASSET-INFO {width: 450px; margin: 0px 15px;}
-    .EXPLORE-ITEM .ASSET-INFO p {color: #ffffff;font-size: 12px; vertical-align: top; margin: 5px 0; line-height: 1.2; display: inline-block;}
+    .EXPLORE-ITEM .ASSET-INFO p {font-size: 12px; vertical-align: top; margin: 5px 0; line-height: 1.2; display: inline-block;}
     footer {width: 400px;}
     .HEADER .WALLET {width: 100px; height: 20px; position: fixed; right: -1px; top: 10px; background-color: #777777; text-align: right; padding: 5px 10px; border-radius: 4px; z-index: 10; display: inline-block;}
-    .HEADER .WALLET a {color: #f1f1f1; font-size: 12px; vertical-align: middle; display: inline-block; font-weight: bold; margin-right: 5px;}
+    .HEADER .WALLET a { font-size: 12px; vertical-align: middle; display: inline-block; font-weight: bold; margin-right: 5px;}
     .HEADER .WALLET figure {width: 20px; height: 20px; display: inline-block; border-radius: 50%; vertical-align: middle;}
     .HEADER .WALLET figure img {width: 20px; height: 20px; display: inline-block; border-radius: 50%;}
 }
