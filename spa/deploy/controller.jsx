@@ -4,9 +4,9 @@ var DeployController = function (view) {
 
     context.deploy = async function deploy(data) {
         await context.preConditionCheck(data);
-        var chunks = await context.readChunks(data.data[0]);
+        var chunks = await context.readChunks(data.file[0]);
         var metadata = {
-            external_url: await window.DocumentsUploaderProvider.upload(data.data[0]),
+            external_url: await window.DocumentsUploaderProvider.upload(data.file[0]),
             image: await window.DocumentsUploaderProvider.upload(data.cover[0]),
             name: data.title,
             description: data.description,
@@ -84,27 +84,13 @@ var DeployController = function (view) {
         !data.title && errors.push("Title is mandatory");
         !data.description && errors.push("Description is mandatory");
         !data.background && errors.push("Background color is mandatory");
-        (!data.data || data.data.length === 0) && errors.push("Data is mandatory");
+        (!data.file || data.file.length === 0) && errors.push("Data is mandatory");
         (!data.cover || data.cover.length === 0) && errors.push("Cover is mandatory");
 
-        data.cover && data.cover.length > 0 && !(await context.checkCoverSize(data.cover[0])) && errors.push("Cover size must be 350x350 px");
+        data.cover && data.cover.length > 0 && !(await window.checkCoverSize(data.cover[0])) && errors.push("Cover size must be 350x350 px");
 
         if (errors.length > 0) {
             throw errors.join('\n');
         }
-    };
-
-    context.checkCoverSize = function checkCoverSize(cover) {
-        return new Promise(function (ok, ko) {
-            var reader = new FileReader();
-            reader.addEventListener("load", function () {
-                var image = new Image();
-                image.onload = function onload() {
-                    return ok(image.width === image.height && image.width === 350);
-                };
-                image.src = (window.URL || window.webkitURL).createObjectURL(cover);
-            }, false);
-            reader.readAsDataURL(cover);
-        });
     };
 };

@@ -36,7 +36,8 @@ var ExploreController = function (view) {
         for(var tokenId = start; tokenId < end; tokenId++) {
             var item = items[tokenId] = {
                 tokenId,
-                metadataLink : await window.ethArt.getString(window.toStateHolderKey(tokenId))
+                metadataLink : await window.ethArt.getString(window.toStateHolderKey(tokenId)),
+                loading: true
             };
             context.view.setState({items});
             var metadata = await window.AJAXRequest(item.metadataLink.split('ipfs://').join('//gateway.ipfs.io/'));
@@ -47,6 +48,7 @@ var ExploreController = function (view) {
                 } catch(e) {
                 }
             });
+            delete item.loading;
             context.view.setState({items});
         }
     };

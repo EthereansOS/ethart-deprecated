@@ -1,4 +1,13 @@
 var Donation = React.createClass({
+    validate() {
+        var data = window.getData(this.domRoot);
+        for(var value of Object.values(data)) {
+            if(value) {
+                return;
+            }
+        }
+        throw "A donation option must be chosen";
+    },
     onClick(e) {
         e && e.preventDefault && e.preventDefault() && e.stopPropagation && e.stopPropagation();
         $($(e.currentTarget).parent()).children('input').click();

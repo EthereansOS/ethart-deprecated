@@ -1,4 +1,10 @@
 var NftType = React.createClass({
+    validate() {
+        var data = window.getData(this.domRoot);
+        if(!data.regular && !data.onchain) {
+            throw "You must choose the NFT Type";
+        }
+    },
     render() {
         return (<section>
             <section className="DEPLOY-INFO">

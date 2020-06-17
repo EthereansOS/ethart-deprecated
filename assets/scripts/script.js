@@ -183,12 +183,11 @@ window.getData = function getData(root, checkValidation) {
         (input.type === 'checkbox' || input.type === 'radio') && (data[id] = input.checked);
         !input.type || input.type === 'hidden' && (data[id] = $(input).val());
         input.type === 'file' && (data[id] = input.files);
-        if (checkValidation) {
-            if (!data[id]) {
-                throw "Data is mandatory";
-            }
-            if (input.type === 'number' && isNaN(data[id])) {
-                throw "Number is mandatory";
+        if (checkValidation || input.dataset.mandatory === 'true') {
+            if (!data[id] || 
+                (input.type === 'number' && isNaN(data[id])) ||
+                (input.type === 'file' && data[id].length === 0)) {
+                throw id.firstLetterToUpperCase() + " is mandatory";
             }
         }
     });
@@ -1052,5 +1051,19 @@ window.AJAXRequest = function AJAXRequest(link, timeout, toU) {
             }
             ko();
         }, timeout);
+    });
+};
+
+window.checkCoverSize = function checkCoverSize(cover) {
+    return new Promise(function (ok) {
+        var reader = new FileReader();
+        reader.addEventListener("load", function () {
+            var image = new Image();
+            image.onload = function onload() {
+                return ok(image.width === image.height && image.width === 350);
+            };
+            image.src = (window.URL || window.webkitURL).createObjectURL(cover);
+        }, false);
+        reader.readAsDataURL(cover);
     });
 };

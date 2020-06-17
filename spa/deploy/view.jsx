@@ -12,10 +12,16 @@ var Deploy = React.createClass({
         };
     },
     dumpData() {
-        this.data = this.data || {};
-        var data = window.getData(this.currentPage.domRoot);
-        Object.keys(data).forEach(key => this.data[key] = data[key]);
-        return this.data;
+        try {
+            this.currentPage.validate && this.currentPage.validate();
+            this.data = this.data || {};
+            var data = window.getData(this.currentPage.domRoot);
+            Object.keys(data).forEach(key => this.data[key] = data[key]);
+            return this.data;
+        } catch(e) {
+            alert(e.message || e);
+            throw e;
+        }
     },
     deploy(e) {
         e && e.preventDefault && e.preventDefault() && e.stopPropagation && e.stopPropagation();

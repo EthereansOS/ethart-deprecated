@@ -1,4 +1,7 @@
 var Balance = React.createClass({
+    requiredScripts : [
+        'spa/loader.jsx'
+    ],
     componentDidMount() {
         this.controller.renderItems();
     },
@@ -10,10 +13,11 @@ var Balance = React.createClass({
     renderItem(it) {
         return (<section key={it.tokenId} className="BALANCE-ITEM">
             <figure style= {{backgroundColor: it.background_color}}>
-                <img src={it.name ? (it.image || "/assets/img/missingno.png") : "/assets/img/missingno.png"}></img>
+                {it.loading && <Loader/>}
+                {!it.loading && <img src={it.name ? (it.image || "/assets/img/missingno.png") : "/assets/img/missingno.png"}/>}
             </figure>
             <section className="ASSET-INFO">
-                <p>#{it.tokenId} - {it.name ? window.shortenWord(it.name) : "MISSINGNO."}</p>
+                <p>#{it.tokenId} - {it.loading ? "Loading..." : it.name ? window.shortenWord(it.name) : "MISSINGNO."}</p>
             </section>
             <section className="ASSET-ACTION">
                 <a className="OS" target="_blank" href={this.state.etherscanLink + it.tokenId}>Etherscan</a>

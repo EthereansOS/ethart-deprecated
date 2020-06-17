@@ -1,4 +1,7 @@
 var Explore = React.createClass({
+    requiredScripts : [
+        'spa/loader.jsx'
+    ],
     componentDidMount() {
         this.controller.renderItems();
     },
@@ -10,10 +13,11 @@ var Explore = React.createClass({
     renderItem(it) {
         return (<section key={it.tokenId} className="EXPLORE-ITEM">
             <figure>
-                <img src={!it.name ? "assets/img/missingno.png" : window.makeBlockie(it.tokenId + this.state.tokenAddress)}></img>
+                {it.loading && <Loader/>}
+                {!it.loading && <img src={!it.name ? "assets/img/missingno.png" : window.makeBlockie(it.tokenId + this.state.tokenAddress)}/>}
             </figure>
             <section className="ASSET-INFO">
-                <h4>#{it.tokenId} - {it.name ? window.shortenWord(it.name) : "MISSINGNO."}</h4>
+                <h4>#{it.tokenId} - {it.loading ? "Loading..." : it.name ? window.shortenWord(it.name) : "MISSINGNO."}</h4>
                 <p>{it.description ? window.shortenWord(it.description, 150) : "No description"}</p>
             </section>
             <section className="ASSET-ACTION">
