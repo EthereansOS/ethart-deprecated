@@ -7,7 +7,7 @@ window.pragmaSolidityRule = /pragma( )*solidity( )*(\^|>)\d+.\d+.\d+;/gs;
 window.base64Regex = /data:([\S]+)\/([\S]+);base64,/gs;
 
 window.Main = async function Main() {
-    await window.loadContext();
+    window.context = await window.AJAXRequest('data/context.json');
     if (!await window.blockchainSetup()) {
         return;
     }
@@ -150,12 +150,6 @@ window.isEthereumAddress = function isEthereumAddress(ad) {
 window.hasEthereumAddress = function(address) {
     return window.isEthereumAddress(address) && address !== window.voidEthereumAddress;
 }
-
-window.loadContext = async function loadContext() {
-    var x = await fetch('data/context.json');
-    window.context = await x.text();
-    window.context = JSON.parse(window.context);
-};
 
 window.choosePage = function choosePage() {
     window.localStorage.setItem("ack", true);

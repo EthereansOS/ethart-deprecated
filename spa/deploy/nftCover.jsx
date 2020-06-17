@@ -3,7 +3,7 @@ var NftCover = React.createClass({
         return (<section>
             <section className="DEPLOY-INFO">
                 <label htmlFor="cover">Cover:</label>
-                <input id="cover" accepts="png" type="file"/>
+                <input id="cover" accept=".png" type="file"/>
                 <p>A Preview cover for dapps and wallets. <br></br><b>Format: .png | Size (px): 350x350</b></p>
             </section>
             <section className="DEPLOY-INFO">

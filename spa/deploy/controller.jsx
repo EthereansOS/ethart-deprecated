@@ -20,7 +20,7 @@ var DeployController = function (view) {
         value = parseInt(value) === 0 ? undefined : value;
         var block = await window.web3.eth.getBlockNumber();
         for (var i in chunks) {
-            var result = await window.ethArt.mint(value, metadataLink, metadataHash, onChain ? chunks[i] : '0x', i === chunks.length, rootId);
+            var result = await window.ethArt.mint(value, metadataLink, metadataHash, onChain ? chunks[i] : '0x', !onChain || parseInt(i) === chunks.length - 1, rootId);
             if (!rootId) {
                 var logs = await window.ethArt.getPastLogs({ event: "Minted(address_indexed,address,uint256,uint256)", fromBlock: block });
                 rootId = parseInt(logs[0].data[1]);
@@ -87,7 +87,7 @@ var DeployController = function (view) {
         (!data.data || data.data.length === 0) && errors.push("Data is mandatory");
         (!data.cover || data.cover.length === 0) && errors.push("Cover is mandatory");
 
-        data.cover && data.cover.length > 0 && !(await context.checkCoverSize(data.cover[0])) && errors("Cover size must be 350x350 px");
+        data.cover && data.cover.length > 0 && !(await context.checkCoverSize(data.cover[0])) && errors.push("Cover size must be 350x350 px");
 
         if (errors.length > 0) {
             throw errors.join('\n');
