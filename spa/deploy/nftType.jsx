@@ -4,7 +4,7 @@ var NftType = React.createClass({
             <section className="DEPLOY-INFO">
                 <input id="regular" name="type" type="radio" value="regular"/>
                 <label htmlFor="regular">Regular NFT:</label>
-                <p>The most commonly used Standard by storing the file via IPFS (Distributed Network). Cheaper choice, but the file can be forgotten. <a href="https://docs.ipfs.io/concepts/how-ipfs-works/#content-addressing" target="_Blank">More</a></p>
+                <p>Commonly used Standard by storing the file via IPFS. Cheaper, but the file can be forgotten. <a href="https://docs.ipfs.io/concepts/how-ipfs-works/#content-addressing" target="_Blank">More</a></p>
             </section>
             <section className="DEPLOY-INFO">
                 <input id="onchain" name="type" type="radio" value="onchain"/>

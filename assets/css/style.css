@@ -56,25 +56,25 @@ li p {width: 600px; text-align: center; font-size: 18px; display: inline-block; 
 .MANAGE h3, .EXPLORE h3 {color: #bfbfbf; font-size: 21px;}
 .MANAGE h3 a, .EXPLORE h3 a {color: #bfbfbf; font-size: 16px;}
 .MANAGE h6 {color: #f1f1f1; font-size: 12px; font-weight: normal; line-height: 1.6;}
-.DEPLOY-ITEM {width: 100%; margin-top: 35px; color: #f1f1f1; text-align: left;}
+.DEPLOY-ITEM {width: 100%; margin-top: 20px; color: #f1f1f1; text-align: left;}
 .DEPLOY-ITEM input {width: 100px; font-size: 13px;}
 .DEPLOY-ITEM input[type="file"] {font-size: 11px; width: 160px;}
 .DEPLOY-ITEM input[type="number"] {width: 100px;}
 .DEPLOY-ITEM input[type="text"] {width: 140px;}
 .DEPLOY-ITEM input[type="color"] {width: 50px;}
-.DEPLOY-ITEM textarea {width: 140px;height: 120px;}
+.DEPLOY-ITEM textarea {width: 140px;height: 150px;}
 .DEPLOY-ITEM input[type="radio"] {width: 12px;}
 .DEPLOY-ITEM label {width: 120px;margin-right: 5px;margin-left: 10px;vertical-align: top;font-size: 16px;margin-bottom: 10px;font-weight: bold;display: inline-block;}
 .DEPLOY-ITEM label span {font-size: 14px;}
 .DEPLOY-ITEM-end {text-align: center;}
-.DEPLOY-ITEM .deploy-btn {font-size: 13px; background-color: #8f00ff; padding: 7px 15px; display: inline-block; font-weight: bold;}
+.DEPLOY-ITEM .deploy-btn {font-size: 13px; background-color: #8f00ff; padding: 7px 15px; display: inline-block; font-weight: bold;margin: 5px;color: #ffffff;text-decoration: none;}
 .DEPLOY-INFO {width: 100%; display: inline-block; margin-bottom: 15px;}
-.DEPLOY-INFO p {font-size: 13px; font-weight: normal; line-height: 1.4;}
+.DEPLOY-INFO p {font-size: 13px; font-weight: normal; line-height: 1.4;margin-top: 5px;padding-left: 30px;}
 .DEPLOY-INFO p a {font-size: 12px; font-weight: bold;color: #b8b8b8; text-decoration: underline;}
 .DEPLOY-DONATIONS {width: 100%; margin-top: -8px;}
 .DEPLOY-DONATION {width: 140px; display: inline-block; margin: 5px;}
 .DEPLOY-DONATION aside {width: 120px;display: inline-block;}
-.DEPLOY-ACTION {width: 100%; margin-top: 10px; text-align: center;}
+.DEPLOY-ACTION {width: 100%;text-align: center;}
 footer {width: 300px; margin: 50px auto 20px auto; display: block; text-align: center;}
 footer h4 {color: #f1f1f1; font-weight: normal; font-size: 15px; padding: 10px 0; display: inline-block; width: 100%;}
 footer h4 a {font-weight: bolder;display: inline-block; color: #f1f1f1;}
@@ -86,10 +86,10 @@ footer h4 a {font-weight: bolder;display: inline-block; color: #f1f1f1;}
 .BALANCE-ITEM .ASSET-INFO p {color: #ffffff;font-size: 14px;font-weight: bold; vertical-align: top; margin: 5px 0;}
 .BALANCE-ITEM .ASSET-INFO a {color: #b8b8b8;font-size: 11px;font-weight: bold; vertical-align: top; margin-top: 5px; text-decoration: underline;}
 .BALANCE-ITEM .ASSET-ACTION {width: 83px; display: inline-block; vertical-align: bottom;}
-.BALANCE-ITEM .ASSET-ACTION a {width: 60px; display: inline-block; font-size: 12px; text-align: center; margin-left: 10px; padding: 2px 5px; margin-bottom: 5px; background-color: #5fe084; font-weight: bold; color: #000000;}
+.BALANCE-ITEM .ASSET-ACTION a {width: 60px; display: inline-block; font-size: 12px; text-align: center; margin-left: 10px; padding: 2px 5px; margin-bottom: 5px; background-color: #5fe084; font-weight: bold; color: #f1f1f1; text-decoration: none;}
 .BALANCE-ITEM .ASSET-ACTION .OS {background-color: #398bf0; color: #f1f1f1;}
 .BALANCE-LOAD {width: 100%; text-align: center; margin: 30px 0;}
-.BALANCE-LOAD .BALANCE-LOAD-FX {font-size: 13px; padding: 8px 10px; background-color: #5fe084; font-weight: bold;}
+.BALANCE-LOAD .BALANCE-LOAD-FX {font-size: 13px; padding: 8px 10px; background-color: #5fe084; font-weight: bold;color: #ffffff;text-decoration: none;}
 .EXPLORE-ITEMS {width: 100%; display: inline-block;}
 .EXPLORE-SEARCH {width: 100%; height: 35px; display: inline-block; text-align: center; padding: 15px 0;}
 .EXPLORE-SEARCH input {width: 50%; display: inline-block; font-size: 16px; height: 27px;}
@@ -105,7 +105,7 @@ footer h4 a {font-weight: bolder;display: inline-block; color: #f1f1f1;}
 .EXPLORE-ITEM .ASSET-ACTION {width: 83px; display: inline-block;vertical-align: top;}
 .EXPLORE-ITEM .ASSET-ACTION a {width: 60px; display: inline-block; font-size: 12px; text-align: center; margin-left: 10px; padding: 2px 5px; margin-bottom: 5px; background-color: #d664dd; font-weight: bold; color: #f1f1f1;}
 .EXPLORE-ITEM .ASSET-ACTION .OS {background-color: #398bf0;}
-.EXPLORE-ITEMS .ASSET-PAGE {display: inline-block;width: 100%;height: 30px;margin-top: 10px;}
+.EXPLORE-ITEMS .ASSET-PAGE {display: inline-block;width: 100%;height: 30px;margin-top: 10px;position: absolute;bottom: 20px;left: 0px;}
 .EXPLORE-ITEMS .ASSET-PAGE p {color: #b8b8b8; margin: 0 15px; font-size: 13px;}
 .EXPLORE-ITEMS .ASSET-PAGE a {color: #b8b8b8; text-decoration: none; font-weight: bold;}
 
