@@ -7,6 +7,13 @@ var Index = React.createClass({
     render() {
         var _this = this;
         return (<section>
+            <section className="UPLOADBANNER">
+                <h1>Uploading...</h1>
+                <h2>Waiting for Propagation</h2>
+                <div class="loadingio-spinner-ripple-6l4nh0xpwdg"><div class="ldio-2it1sjbil3o">
+                <div></div><div></div>
+                </div></div>
+            </section>
             <section className="HEADER">
                 <h1><img src="/assets/img/ethart-logo.png"></img><span className="LOGO-Y-2"><span className="LOGO-P">e</span>th</span><aspan className="LOGO-Pi">ar</aspan><span className="LOGO-G">t</span></h1>
                 <section className="WALLET">
