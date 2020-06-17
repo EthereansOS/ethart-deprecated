@@ -34,7 +34,7 @@ li p {width: 600px; text-align: center; font-size: 18px; display: inline-block; 
 .MANAGE {width: 100%; display: inline-block; text-align: center;}
 .MANAGE h2, .EXPLORE h2 {color: #f3f3f3;font-weight: normal; font-size: 15px; padding: 10px 0; display: inline-block; width: 100%;}
 .SMALL-BOX {width: 360px; margin: 20px auto; display: inline-block; position: relative; height: 360px;}
-.HUGE-BOX {width: 360px; margin: 20px auto; display: inline-block; position: relative; height: 740px;}
+.HUGE-BOX {width: 360px; margin: 20px auto; display: inline-block; position: relative; height: 650px;}
 .shadowP {background-color: #8f00ff; position: absolute; width: 340px; height: 340px; z-index: -1;}
 .shadowP1 {top: 8px; left: 8px;}
 .shadowP2 {top: 11px; left: 11px;}
@@ -43,15 +43,15 @@ li p {width: 600px; text-align: center; font-size: 18px; display: inline-block; 
 .shadowG1 {top: 8px; left: 8px;}
 .shadowG2 {top: 11px; left: 11px;}
 .shadowG3 {top: 14px; left: 14px;}
-.shadowPi {background-color: #d664dd; position: absolute; width: 340px; height: 720px; z-index: -1;}
+.shadowPi {background-color: #d664dd; position: absolute; width: 340px; height: 630px; z-index: -1;}
 .shadowPi1 {top: 8px; left: 8px;}
 .shadowPi2 {top: 11px; left: 11px;}
 .shadowPi3 {top: 14px; left: 14px;}
 .SMALL-MENU {width: 300px; display: inline-block; padding:20px; position: absolute; z-index: 5; left: 5px; top: 5px; height: 300px;overflow: hidden;}
-.HUGE-MENU {width: 300px; display: inline-block; padding:20px; position: absolute; z-index: 5; left: 5px; top: 5px; height: 680px;overflow: hidden;}
-.SMALL-MENU-P {background-color: #2f0054;}
-.SMALL-MENU-G {background-color: #1c3814; overflow-y: scroll; -ms-overflow-style: none;}
-.HUGE-MENU-Pi {background-color: #351935; overflow-y: scroll; -ms-overflow-style: none;}
+.HUGE-MENU {width: 300px; display: inline-block; padding:20px; position: absolute; z-index: 5; left: 5px; top: 5px; height: 590px;overflow: hidden;}
+.SMALL-MENU-P {background-color: #292929;}
+.SMALL-MENU-G {background-color: #292929; overflow-y: scroll; -ms-overflow-style: none;}
+.HUGE-MENU-Pi {background-color: #292929; overflow-y: scroll; -ms-overflow-style: none;}
 .HUGE-MENU-Pi::-webkit-scrollbar, .SMALL-MENU-G::-webkit-scrollbar {display: none;}
 .MANAGE h3, .EXPLORE h3 {color: #bfbfbf; font-size: 21px;}
 .MANAGE h3 a, .EXPLORE h3 a {color: #bfbfbf; font-size: 16px;}
@@ -80,12 +80,12 @@ footer h4 {color: #f1f1f1; font-weight: normal; font-size: 15px; padding: 10px 0
 footer h4 a {font-weight: bolder;display: inline-block; color: #f1f1f1;}
 .EXPLORE {width: 100%; text-align: center; display: inline-block;}
 .BALANCE-ITEM {width: 100%; height: 50px; margin: 15px 0; text-align: left;}
-.BALANCE-ITEM figure {width: 45px; height: 45px; display: inline-block;}
+.BALANCE-ITEM figure {width: 45px; height: 45px; display: inline-block; vertical-align: middle;}
 .BALANCE-ITEM figure img {width: 45px; height: 45px;}
-.BALANCE-ITEM .ASSET-INFO {width: 150px; height: 60px; display: inline-block; vertical-align: top; margin: 0px 10px;}
+.BALANCE-ITEM .ASSET-INFO {width: 150px; height: 60px; display: inline-block; vertical-align: middle; margin: 0px 10px;}
 .BALANCE-ITEM .ASSET-INFO p {color: #ffffff;font-size: 14px;font-weight: bold; vertical-align: top; margin: 5px 0;}
 .BALANCE-ITEM .ASSET-INFO a {color: #b8b8b8;font-size: 11px;font-weight: bold; vertical-align: top; margin-top: 5px; text-decoration: underline;}
-.BALANCE-ITEM .ASSET-ACTION {width: 83px; display: inline-block;}
+.BALANCE-ITEM .ASSET-ACTION {width: 83px; display: inline-block; vertical-align: bottom;}
 .BALANCE-ITEM .ASSET-ACTION a {width: 60px; display: inline-block; font-size: 12px; text-align: center; margin-left: 10px; padding: 2px 5px; margin-bottom: 5px; background-color: #5fe084; font-weight: bold; color: #000000;}
 .BALANCE-ITEM .ASSET-ACTION .OS {background-color: #398bf0; color: #f1f1f1;}
 .BALANCE-LOAD {width: 100%; text-align: center; margin: 30px 0;}

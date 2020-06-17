@@ -35,8 +35,8 @@ var Deploy = React.createClass({
     },
     render() {
         return (<section className="DEPLOY-ITEM">
+            {window.React.createElement(this.requiredScripts[this.state.page].split('spa/deploy/').join('').split('.jsx').join('').firstLetterToUpperCase(), {ref : ref => this.currentPage = ref})}
             <section className="DEPLOY-ACTION">
-                {window.React.createElement(this.requiredScripts[this.state.page].split('spa/deploy/').join('').split('.jsx').join('').firstLetterToUpperCase(), {ref : ref => this.currentPage = ref})}
                 {this.state.page > 0 && <a href="javascript:;" onClick={() => this.changePage(-1)} className="deploy-btn">prev</a>}
                 {this.state.page < this.requiredScripts.length - 1 && <a href="javascript:;" onClick={() => this.changePage(1)} className="deploy-btn">next</a>}
                 {this.state.page === this.requiredScripts.length - 1 && <a href="javascript:;" onClick={() => this.deploy()} className="deploy-btn">deploy</a>}

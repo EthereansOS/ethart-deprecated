@@ -9,7 +9,7 @@ var NftType = React.createClass({
             <section className="DEPLOY-INFO">
                 <input id="onchain" name="type" type="radio" value="onchain"/>
                 <label htmlFor="onchain">Onchain NFT:</label>
-                <p>A decentralized standard by storing the file on-chain via base64. Expensive, but the file is stored perpetually as long as the ethereum network exists.</p>
+                <p>A decentralized standard by storing the file on-chain. Expensive, but the file is stored perpetually as long as the ethereum network exists.</p>
             </section>
         </section>);
     }
