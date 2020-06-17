@@ -121,7 +121,7 @@ footer h4 a {font-weight: bolder;display: inline-block; }
 .BETABANNER section > a:hover {background-color: #398bf0;}
 .BETABANNER .SASSAL {width: 20px; height: 20px; position: fixed; bottom: 10px; left: 5px;}
 .BETABANNER .SASSAL img {width: 20px; height: 20px;}
-.UPLOADBANNER {width: 100%;height: 100%;overflow: hidden;display: inline-block;background-color: #000000fa;position: fixed;top: 0;left: 0;text-align: center;z-index: 10000;padding-top: 180px;}
+.UPLOADBANNER {width: 100%;height: 100%;overflow: hidden;display: none;background-color: #000000fa;position: fixed;top: 0;left: 0;text-align: center;z-index: 10000;padding-top: 180px;}
 .UPLOADBANNER h1 {font-size: 50px;}
 .UPLOADBANNER h2 {font-size: 25px; margin-top: 20px;}
 .UPLOADBANNER .loadingio-spinner-ripple-6l4nh0xpwdg {margin-top: 50px;}
