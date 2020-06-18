@@ -494,8 +494,9 @@ window.getCodeCache = function getCodeCache() {
 };
 
 window.split = function split(content, length) {
-    var regex = new RegExp(window.base64Regex).exec(content);
-    content = regex && regex.index === 0 ? content : ('data:text/plain;base64,' + Base64.encode(content));
+    /*var regex = new RegExp(window.base64Regex).exec(content);
+    content = regex && regex.index === 0 ? content : ('data:text/plain;base64,' + Base64.encode(content));*/
+    content = content.indexOf('data:') === 0 && content.indexOf(';base64,') !== -1 ? content : ('data:text/plain;base64,' + Base64.encode(content));
     var data = window.web3.utils.fromUtf8(content);
     var inputs = [];
     var defaultLength = (length || window.context.singleTokenLength) - 2;
