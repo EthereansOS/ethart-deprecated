@@ -5,7 +5,7 @@
     },
     "etherscanURL": "https://etherscan.io/",
     "etherscanURLRopsten": "https://ropsten.etherscan.io/",
-    "singleTokenLength" : 13800,
+    "singleTokenLength" : 10000,
     "ethArtAddress" : "0x4A08d087817Fa803ef3E0B4E17D7856692F5d68D",
     "ethArtAddressRopsten" : "0x06A9723C7c471120EE65CaAFc65E2DBd3e9fDd1D",
     "ipfsHost": "https://ipfs.infura.io:5001/api/v0/",
