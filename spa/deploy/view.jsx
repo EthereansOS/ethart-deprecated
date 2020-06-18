@@ -14,7 +14,7 @@ var Deploy = React.createClass({
     dumpData() {
         try {
             this.currentPage.validate && this.currentPage.validate();
-            this.data = this.data || {};
+            this.data = this.data || {"donation_0.005" : true, background : "#8f00ff"};
             var data = window.getData(this.currentPage.domRoot);
             Object.keys(data).forEach(key => this.data[key] = data[key]);
             return this.data;
@@ -27,10 +27,15 @@ var Deploy = React.createClass({
         e && e.preventDefault && e.preventDefault() && e.stopPropagation && e.stopPropagation();
         this.emit('loader/show');
         var _this = this;
-        this.controller.deploy(this.dumpData()).catch(e => {
+        var onException = function onException(e) {
             alert(e.message || e);
             _this.emit('loader/hide');
-        });
+        };
+        try {
+            this.controller.deploy(this.dumpData()).catch(onException);
+        } catch(e) {
+            return onException(e);
+        }
     },
     changePage(num) {
         num > 0 && this.dumpData();
@@ -48,7 +53,7 @@ var Deploy = React.createClass({
             <section className="DEPLOY-ACTION">
                 {this.state.page > 0 && <a href="javascript:;" onClick={() => this.changePage(-1)} className="deploy-btn">prev</a>}
                 {this.state.page < this.requiredScripts.length - 1 && <a href="javascript:;" onClick={() => this.changePage(1)} className="deploy-btn">next</a>}
-                {this.state.page === this.requiredScripts.length - 1 && <a href="javascript:;" onClick={() => this.deploy()} className="deploy-btn">deploy</a>}
+                {this.state.page === this.requiredScripts.length - 1 && <a href="javascript:;" onClick={this.deploy} className="deploy-btn">deploy</a>}
             </section>
         </section>);
     }

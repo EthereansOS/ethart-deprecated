@@ -19,7 +19,7 @@ var NftCover = React.createClass({
             </section>
             <section className="DEPLOY-INFO">
                 <label htmlFor="background">Background:</label>
-                <input id="background" data-mandatory="true" type="color" ref={ref => ref && (ref.value = "#8f00ff")}/>
+                <input id="background" data-mandatory="true" type="color"/>
                 <p>Background color displayed by dapps and Wallets.</p>
             </section>
         </section>);

@@ -30,7 +30,7 @@ var Donation = React.createClass({
                         <aside onClick={this.onClick}>&#128526; 0.01 ETH</aside>
                     </section>
                     <section className="DEPLOY-DONATION">
-                        <input name="donation" type="radio" id="donation_0.005" ref={ref => ref && (ref.checked = true)}/>
+                        <input name="donation" type="radio" id="donation_0.005"/>
                         <aside onClick={this.onClick}>&#128578; 0.005 ETH</aside>
                     </section>
                     <section className="DEPLOY-DONATION">
