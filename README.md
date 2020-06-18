@@ -38,10 +38,4 @@ In fact, all standard ERC721 methods called in this Contract are totally redirec
 
 This project is open source without any fees added, but users can donate ETH, BUIDL or USDC to the DFOhub Wallet, so every donation will increase the backed value of $BUIDL.
 
-## Release date:
-
-Testing Smart Contracts, soon available for everyone 
-
-### Mainnet Deploy scheduled for June 18 2020
-
 PS: We'll use this standard for the Logo Challange! More info soon!
