@@ -36,6 +36,6 @@ In fact, all standard ERC721 methods called in this Contract are totally redirec
 
 ## Business Model:
 
-This project is open source without any fees added, but users can donate ETH, BUIDL or USDC to the DFOhub Wallet, so every donation will increase the backed value of $BUIDL.
+This project is open source without any fees added, but users can donate ETH to the DFOhub Wallet, so every donation will increase the backed value of $BUIDL.
 
 PS: We'll use this standard for the Logo Challange! More info soon!
