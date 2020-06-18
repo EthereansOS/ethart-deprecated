@@ -2,7 +2,7 @@ var DeployController = function (view) {
     var context = this;
     context.view = view;
 
-    context.deploy = async function deploy(data) {
+    context.deploy = async function deploy(data, onException) {
         await context.preConditionCheck(data);
         var onChain = data.onchain === true;
         var chunks = onChain ? await context.readChunks(data.file[0]) : [""];
@@ -33,6 +33,11 @@ var DeployController = function (view) {
                     }
                 }
             } catch (e) {
+                if(!onException) {
+                    context.view.emit('loader/hide');
+                    throw e;
+                }
+                return onException(e);
             }
             context.view.emit('loader/hide');
         });

@@ -32,7 +32,7 @@ var Deploy = React.createClass({
             _this.emit('loader/hide');
         };
         try {
-            this.controller.deploy(this.dumpData()).catch(onException);
+            this.controller.deploy(this.dumpData(), onException).catch(onException);
         } catch(e) {
             return onException(e);
         }
