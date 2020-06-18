@@ -7,8 +7,8 @@ var DeployController = function (view) {
         var onChain = data.onchain === true;
         var chunks = onChain ? await context.readChunks(data.file[0]) : [""];
         var metadata = {
-            external_url: await window.DocumentsUploaderProvider.upload(data.file[0].split('ipfs://').join('https://ipfs.io/')),
-            image: await window.DocumentsUploaderProvider.upload(data.cover[0].split('ipfs://').join('https://ipfs.io/')),
+            external_url: (await window.DocumentsUploaderProvider.upload(data.file[0])).split('ipfs://').join('https://ipfs.io/'),
+            image: (await window.DocumentsUploaderProvider.upload(data.cover[0])).split('ipfs://').join('https://ipfs.io/'),
             name: data.title,
             description: data.description,
             background_color: data.background
