@@ -7,8 +7,8 @@ var DeployController = function (view) {
         var onChain = data.onchain === true;
         var chunks = onChain ? await context.readChunks(data.file[0]) : [""];
         var metadata = {
-            external_url: await window.DocumentsUploaderProvider.upload(data.file[0]),
-            image: await window.DocumentsUploaderProvider.upload(data.cover[0]),
+            external_url: await window.DocumentsUploaderProvider.upload(data.file[0].split('ipfs://').join('https://ipfs.io/')),
+            image: await window.DocumentsUploaderProvider.upload(data.cover[0].split('ipfs://').join('https://ipfs.io/')),
             name: data.title,
             description: data.description,
             background_color: data.background
@@ -62,7 +62,7 @@ var DeployController = function (view) {
                 return ko("Cannot retrieve file extension");
             }
             var reader = new FileReader();
-            reader.addEventListener("load", function () {
+            reader.addEventListener("load", async function () {
                 var result = reader.result;
                 var mimeType;
                 try {
@@ -77,7 +77,7 @@ var DeployController = function (view) {
                     return ko("Unsupported file extension (." + extension + ")");
                 }
                 result = "data:" + mimeType + result.substring(result.indexOf(";"));
-                ok(window.split(result, context.view.state && context.view.state.singleTokenLength));
+                ok(await window.split(result, context.view.state && context.view.state.singleTokenLength));
             }, false);
             reader.readAsDataURL(file);
         });
