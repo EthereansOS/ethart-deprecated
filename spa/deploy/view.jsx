@@ -6,6 +6,18 @@ var Deploy = React.createClass({
         'spa/deploy/nftFile.jsx',
         'spa/deploy/donation.jsx'
     ],
+    getDefaultSubscriptions() {
+        return {
+            'deploy/pause' : this.pause,
+            'deploy/resume' : this.resume,
+        };
+    },
+    pause() {
+        this.domRoot.children().find('a').addClass('disabled');
+    },
+    resume() {
+        this.domRoot.children().find('a').removeClass('disabled');
+    },
     getInitialState() {
         return {
             page : 0
@@ -25,6 +37,9 @@ var Deploy = React.createClass({
     },
     deploy(e) {
         e && e.preventDefault && e.preventDefault() && e.stopPropagation && e.stopPropagation();
+        if($(e.currentTarget).hasClass('disabled')) {
+            return;
+        }
         this.emit('loader/show');
         var _this = this;
         var onException = function onException(e) {
@@ -37,7 +52,11 @@ var Deploy = React.createClass({
             return onException(e);
         }
     },
-    changePage(num) {
+    changePage(e, num) {
+        e && e.preventDefault && e.preventDefault() && e.stopPropagation && e.stopPropagation();
+        if($(e.currentTarget).hasClass('disabled')) {
+            return;
+        }
         num > 0 && this.dumpData();
         var _this = this;
         var page = this.state.page;
@@ -45,14 +64,15 @@ var Deploy = React.createClass({
         page = page < 0 ? 0 : page >= this.requiredScripts.length ? this.requiredScripts.length - 1 : page;
         this.setState({page}, function() {
             window.setData(_this.currentPage.domRoot, _this.data);
+            setTimeout(() => window.setData(_this.currentPage.domRoot, _this.data));
         });
     },
     render() {
         return (<section className="DEPLOY-ITEM">
             {window.React.createElement(this.requiredScripts[this.state.page].split('spa/deploy/').join('').split('.jsx').join('').firstLetterToUpperCase(), {ref : ref => this.currentPage = ref})}
             <section className="DEPLOY-ACTION">
-                {this.state.page > 0 && <a href="javascript:;" onClick={() => this.changePage(-1)} className="deploy-btn">prev</a>}
-                {this.state.page < this.requiredScripts.length - 1 && <a href="javascript:;" onClick={() => this.changePage(1)} className="deploy-btn">next</a>}
+                {this.state.page > 0 && <a href="javascript:;" onClick={e => this.changePage(e, -1)} className="deploy-btn">prev</a>}
+                {this.state.page < this.requiredScripts.length - 1 && <a href="javascript:;" onClick={e => this.changePage(e, 1)} className="deploy-btn">next</a>}
                 {this.state.page === this.requiredScripts.length - 1 && <a href="javascript:;" onClick={this.deploy} className="deploy-btn">deploy</a>}
             </section>
         </section>);

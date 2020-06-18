@@ -4,7 +4,7 @@ window.descriptionWordLimit = 300;
 window.urlRegex = /(https?:\/\/[^\s]+)/gs;
 window.solidityImportRule = /import( )*"(\d+)"( )*;/gs;
 window.pragmaSolidityRule = /pragma( )*solidity( )*(\^|>)\d+.\d+.\d+;/gs;
-window.base64Regex = /data:([\S]+)\/([\S]+);base64,/gs;
+window.base64Regex = /^data:([\S]+)\/([\S]+);base64,/gs;
 
 window.Main = async function Main() {
     window.context = await window.AJAXRequest('data/context.json');
@@ -445,7 +445,7 @@ window.loadContent = async function loadContent(tokenId, ocelotAddress, raw) {
     var value = chains.join('');
     value = window.web3.utils.toUtf8(value).trim();
     value = raw ? value : Base64.decode(value.substring(value.indexOf(',')));
-    var regex = new RegExp(window.base64Regex).exec(value);
+    var regex = new RegExp(window.base64Regex).exec(value.substring(0, value.length < 80 ? value.length : 80));
     !raw && regex && regex.index === 0 && (value = Base64.decode(value.substring(value.indexOf(','))));
     return value;
 };
@@ -493,25 +493,35 @@ window.getCodeCache = function getCodeCache() {
     return window.codeCache;
 };
 
-window.split = function split(content, length) {
-    /*var regex = new RegExp(window.base64Regex).exec(content);
-    content = regex && regex.index === 0 ? content : ('data:text/plain;base64,' + Base64.encode(content));*/
-    content = content.indexOf('data:') === 0 && content.indexOf(';base64,') !== -1 ? content : ('data:text/plain;base64,' + Base64.encode(content));
-    var data = window.web3.utils.fromUtf8(content);
+window.split = async function split(content, length, callback) {
+    content = await new Promise(function(ok) {
+        var test = content.substring(0, content.length < 80 ? content.length : 80);
+        var regex = new RegExp(window.base64Regex).exec(test);
+        ok(regex && regex.index === 0 ? content : ('data:text/plain;base64,' + Base64.encode(content)));
+    });
     var inputs = [];
-    var defaultLength = (length || window.context.singleTokenLength) - 2;
-    if (data.length <= defaultLength) {
-        inputs.push(data);
+    var defaultLength = (length || window.context.singleTokenLength);
+    if (2 + (content.length * 2) <= defaultLength) {
+        inputs.push(window.web3.utils.fromUtf8(content));
+        callback && callback(1);
     } else {
-        while (data.length > 0) {
-            var length = data.length < defaultLength ? data.length : defaultLength;
-            var piece = data.substring(0, length);
-            data = data.substring(length);
-            if (inputs.length > 0) {
-                piece = '0x' + piece;
-            }
-            inputs.push(piece);
-        }
+        var data = content;
+        await new Promise(function(ok) {
+            var loop = function() {
+                if(data.length === 0) {
+                    return ok(inputs);
+                }
+                var length = 2 + (data.length * 2);
+                length = Math.ceil((length <= defaultLength ? length : defaultLength) / 2);
+                length = length > data.length ? data.length : length;
+                var piece = data.substring(0, length);
+                data = data.substring(length);
+                inputs.push(window.web3.utils.fromUtf8(piece));
+                callback && callback(inputs.length);
+                setTimeout(loop);
+            };
+            setTimeout(loop);
+        });
     }
     return inputs;
 };
@@ -1068,3 +1078,20 @@ window.checkCoverSize = function checkCoverSize(cover) {
         reader.readAsDataURL(cover);
     });
 };
+
+window.uploadToIPFS = async function uploadToIPFS(files) {
+    var single = !(files instanceof Array);
+    files = single ? [files] : files;
+    for(var i in files) {
+        var file = files[i];
+        if(!(file instanceof File) && !(file instanceof Blob)) {
+            files[i] = new Blob([JSON.stringify(files[i], null, 4)], {type: "application/json"});
+        }
+    }
+    var hashes = [];
+    window.api = window.api || new IpfsHttpClient(window.context.ipfsHost);
+    for await(var upload of window.api.add(files)) {
+        hashes.push(window.context.ipfsUrlTemplate + upload.path);
+    }
+    return single ? hashes[0] : hashes;
+}

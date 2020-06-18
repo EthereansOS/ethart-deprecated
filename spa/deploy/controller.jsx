@@ -4,21 +4,22 @@ var DeployController = function (view) {
 
     context.deploy = async function deploy(data, onException) {
         await context.preConditionCheck(data);
-        var onChain = data.onchain === true;
-        var chunks = onChain ? await context.readChunks(data.file[0]) : [""];
         var metadata = {
-            external_url: (await window.DocumentsUploaderProvider.upload(data.file[0])).split('ipfs://').join('https://ipfs.io/'),
-            image: (await window.DocumentsUploaderProvider.upload(data.cover[0])).split('ipfs://').join('https://ipfs.io/'),
+            external_url: (await window.uploadToIPFS(data.file[0])).split('ipfs://').join('https://ipfs.io/'),
+            image: (await window.uploadToIPFS(data.cover[0])).split('ipfs://').join('https://ipfs.io/'),
             name: data.title,
             description: data.description,
             background_color: data.background
         };
-        var metadataLink = await window.DocumentsUploaderProvider.upload(metadata);
+        context.view.emit('loader/show');
+        var metadataLink = await window.uploadToIPFS(metadata);
         context.view.emit('loader/propagate', [metadataLink, metadata.external_url, metadata.image], async function () {
             var metadataHash = window.web3.utils.sha3(JSON.stringify(metadata));
             var rootId = context.view.state.rootId || 0;
             var value = window.web3.utils.toWei(context.getDonation(data), 'ether');
             value = parseInt(value) === 0 ? undefined : value;
+            var onChain = data.onchain === true;
+            var chunks = onChain ? await context.readChunks(data.file[0]) : [""];
             var block = await window.web3.eth.getBlockNumber();
             try {
                 for (var i in chunks) {
@@ -69,6 +70,9 @@ var DeployController = function (view) {
             var reader = new FileReader();
             reader.addEventListener("load", async function () {
                 var result = reader.result;
+                if(result === '') {
+                    return ko("Cannot read " + file.name + ". Maybe it's too large");
+                }
                 var mimeType;
                 try {
                     mimeType = result.substring(5, result.indexOf(";"));
@@ -82,7 +86,9 @@ var DeployController = function (view) {
                     return ko("Unsupported file extension (." + extension + ")");
                 }
                 result = "data:" + mimeType + result.substring(result.indexOf(";"));
-                ok(await window.split(result, context.view.state && context.view.state.singleTokenLength));
+                ok(await window.split(result, context.view.state && context.view.state.singleTokenLength, number => {
+                    context.view.emit('loader/chunks', number);
+                }));
             }, false);
             reader.readAsDataURL(file);
         });
