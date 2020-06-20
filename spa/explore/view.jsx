@@ -17,7 +17,7 @@ var Explore = React.createClass({
                 {!it.loading && <img src={!it.name ? "assets/img/missingno.png" : window.makeBlockie(it.tokenId + it.tokenAddress)}/>}
             </figure>
             <section className="ASSET-INFO">
-                <h4>#{it.tokenId} - {it.loading ? "Loading..." : it.name ? window.shortenWord(it.name) : "MISSINGNO."}</h4>
+                <h4>{it.ticker} #{it.tokenId} - {it.loading ? "Loading..." : it.name ? window.shortenWord(it.name) : "MISSINGNO."}</h4>
                 <p>{it.description ? window.shortenWord(it.description, 150) : "No description"}</p>
             </section>
             <section className="ASSET-ACTION">

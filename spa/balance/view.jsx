@@ -17,7 +17,7 @@ var Balance = React.createClass({
                 {!it.loading && <img src={it.name ? (it.image || "/assets/img/missingno.png") : "/assets/img/missingno.png"}/>}
             </figure>
             <section className="ASSET-INFO">
-                <p>#{it.tokenId} - {it.loading ? "Loading..." : it.name ? window.shortenWord(it.name) : "MISSINGNO."}</p>
+                <p>{it.ticker} #{it.tokenId} - {it.loading ? "Loading..." : it.name ? window.shortenWord(it.name) : "MISSINGNO."}</p>
             </section>
             <section className="ASSET-ACTION">
                 <a className="OS" target="_blank" href={it.etherscanLink}>Etherscan</a>
