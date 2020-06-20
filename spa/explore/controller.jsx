@@ -7,12 +7,12 @@ var ExploreController = function (view) {
             return setTimeout(()=> context.renderItems());
         }
         var pages = await context.renderPages();
-        context.renderItemsOfToken(window.ethArtToken, pages.start, pages.end);
-        context.renderItemsOfToken(window.standaloneToken, pages.start, pages.end);
+        var items = {};
+        context.renderItemsOfToken(window.ethArtToken, items, pages.start, pages.end);
+        context.renderItemsOfToken(window.standaloneToken, items, pages.start, pages.end);
     };
 
-    context.renderItemsOfToken = async function renderItemsOfToken(token, start, end) {
-        var items = {};
+    context.renderItemsOfToken = async function renderItemsOfToken(token, items, start, end) {
         var tokenAddress = token.options.address;
         var totalSupply = parseInt(await window.blockchainCall(token.methods.totalSupply));
         if(start >= totalSupply) {
@@ -21,7 +21,7 @@ var ExploreController = function (view) {
         end = end > totalSupply ? totalSupply : end;
         for(var tokenId = start; tokenId < end; tokenId++) {
             var item = items[tokenId] = {
-                key: tokenId,
+                key: tokenId + "_" + tokenAddress,
                 tokenId,
                 metadataLink : await window.blockchainCall(token.methods.tokenURI, tokenId),
                 openSeaLink : window.context.openSeaURL + tokenAddress + '/' + tokenId,

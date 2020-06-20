@@ -235,27 +235,27 @@ contract EthArt721 is IEthArt721, IERC165, IERC721, IERC721Metadata, IERC721Enum
 
     function mint(bytes memory payload, string memory tokenURI, uint256 tokenId, bool finalize, bytes memory data) public override payable returns(uint256 newTokenId) {
         uint256 length = totalSupply();
-        require(tokenId == 0 || tokenId < length, "Unexisting Token");
-        newTokenId = tokenId == 0 ? length : tokenId;
-        newTokenId = newTokenId == 0 ? 1 : newTokenId;
+        require(tokenId == 0 || tokenId <= length, "Unexisting Token");
+        newTokenId = tokenId == 0 ? length + 1 : tokenId;
 
-        require(newTokenId == length ? true : ownerOf(tokenId) == msg.sender, "Finalize or extend an already-finalized or an already-existing chain of someone else is forbidden");
+        require(newTokenId == (length + 1) || ownerOf(newTokenId) == msg.sender, "Finalize or extend an already-finalized or an already-existing chain of someone else is forbidden");
 
-        if(newTokenId == length) {
+        if(newTokenId == length + 1) {
             _mint(msg.sender, newTokenId, data);
-            _setTokenURI(tokenId, tokenURI);
+            require(keccak256(bytes(tokenURI)) != keccak256(""), "tokenURI Cannot be empty!");
+            _setTokenURI(newTokenId, tokenURI);
         }
 
         bool empty = keccak256(payload) == keccak256("");
         if(!empty) {
-            require(!_finalized[tokenId], "Cannot concatenate already finalized tokens");
-            _chain[tokenId].push(payload);
+            require(!_finalized[newTokenId], "Cannot concatenate already finalized tokens");
+            _chain[newTokenId].push(payload);
         }
 
         if(finalize || empty) {
-            require(!_finalized[tokenId], "Cannot Finalize already finalized tokens");
-            _finalized[tokenId] = true;
-            emit Finalized(tokenId, _chain[tokenId].length);
+            require(!_finalized[newTokenId], "Cannot Finalize already finalized tokens");
+            _finalized[newTokenId] = true;
+            emit Finalized(newTokenId, _chain[newTokenId].length);
         }
 
         if(msg.value > 0) {

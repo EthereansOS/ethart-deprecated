@@ -1,7 +1,7 @@
 var NftType = React.createClass({
     validate() {
         var data = window.getData(this.domRoot);
-        if(!data.regular && !data.onchain && !data.regularStandalone && !data.onchainStandalone) {
+        if(!data.regular && !data.onchain) {
             throw "You must choose the NFT Type";
         }
     },

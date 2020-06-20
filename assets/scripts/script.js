@@ -214,22 +214,26 @@ window.getAddress = async function getAddress() {
     return (window.walletAddress = (await window.web3.eth.getAccounts())[0]);
 };
 
-window.getSendingOptions = function getSendingOptions(transaction) {
+window.getSendingOptions = function getSendingOptions(transaction, value) {
     return new Promise(async function(ok, ko) {
         if (transaction) {
             var address = await window.getAddress();
-            return transaction.estimateGas({
-                    from: address,
-                    gasPrice: window.web3.utils.toWei("13", "gwei")
-                },
+            var txnData = {
+                from: address,
+                gasPrice: window.web3.utils.toWei("13", "gwei")
+            };
+            value && (txnData.value = value);
+            return transaction.estimateGas(txnData,
                 function(error, gas) {
                     if (error) {
                         return ko(error.message || error);
                     }
-                    return ok({
+                    var data = {
                         from: address,
                         gas: gas || window.gasLimit || '7900000'
-                    });
+                    };
+                    value && (data.value = value);
+                    return ok(data);
                 });
         }
         return ok({
@@ -239,12 +243,12 @@ window.getSendingOptions = function getSendingOptions(transaction) {
     });
 };
 
-window.createContract = async function createContract(abi, data) {
+window.createContract = async function createContract(value, abi, data) {
     var args = [];
-    if (arguments.length > 2) {
-        for (var i = 2; i < arguments.length; i++) {
-            args.push(arguments[i]);
-        }
+    data = value !== undefined && isNaN(value) ? abi : data;
+    abi = value !== undefined && isNaN(value) ? value : abi;
+    for (var i = value === abi ? 2 : 3; i < arguments.length; i++) {
+        args.push(arguments[i]);
     }
     var from = await window.getAddress();
     data = window.newContract(abi).deploy({
@@ -270,24 +274,24 @@ window.createContract = async function createContract(abi, data) {
     return window.newContract(abi, contractAddress);
 };
 
-window.blockchainCall = async function blockchainCall(call) {
+window.blockchainCall = async function blockchainCall(value, oldCall) {
     var args = [];
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args.push(arguments[i]);
-        }
+    var call = value !== undefined && isNaN(value) ? value : oldCall;
+    for (var i = value === call ? 1 : 2; i < arguments.length; i++) {
+        args.push(arguments[i]);
     }
+    value = isNaN(value) ? undefined : value;
     var method = (call.implementation ? call.get : call.new ? call.new : call).apply(call, args);
-    return await (method._method.stateMutability === 'view' || method._method.stateMutability === 'pure' ? method.call(await window.getSendingOptions()) : window.sendBlockchainTransaction(method));
+    return await (method._method.stateMutability === 'view' || method._method.stateMutability === 'pure' ? method.call(await window.getSendingOptions()) : window.sendBlockchainTransaction(value, method));
 };
 
-window.sendBlockchainTransaction = function sendBlockchainTransaction(transaction) {
+window.sendBlockchainTransaction = function sendBlockchainTransaction(value, transaction) {
     return new Promise(async function(ok, ko) {
         var handleTransactionError = function handleTransactionError(e) {
             e !== undefined && e !== null && (e.message || e).indexOf('not mined within') === -1 && ko(e);
         }
         try {
-            (transaction = transaction.send ? transaction.send(await window.getSendingOptions(transaction), handleTransactionError) : transaction).on('transactionHash', transactionHash => {
+            (transaction = transaction.send ? transaction.send(await window.getSendingOptions(transaction, value), handleTransactionError) : transaction).on('transactionHash', transactionHash => {
                 var timeout = async function() {
                     var receipt = await window.web3.eth.getTransactionReceipt(transactionHash);
                     if (!receipt || !receipt.blockNumber || parseInt(await window.web3.eth.getBlockNumber()) < (parseInt(receipt.blockNumber) + (window.context.transactionConfirmations || 0))) {

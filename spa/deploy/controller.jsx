@@ -18,24 +18,25 @@ var DeployController = function (view) {
             var rootId = context.view.state.rootId || 0;
             var value = window.web3.utils.toWei(context.getDonation(data), 'ether');
             value = parseInt(value) === 0 ? undefined : value;
-            var onChain = data.onchain === true || data.onchainStandalone === true;
-            var chunks = onChain ? await context.readChunks(data.file[0]) : [""];
+            var onChain = data.onchain === true;
+            var chunks = onChain ? await context.readChunks(data.file[0], data.dfo) : [""];
             var block = await window.web3.eth.getBlockNumber();
             try {
                 for (var i in chunks) {
                     context.view.emit('loader/transaction', parseInt(i) + 1, onChain ? chunks.length : 1);
-                    if(data.onchain || data.regular) {
+                    if(data.dfo) {
                         var result = await window.ethArt.mint(value, metadataLink, metadataHash, onChain ? chunks[i] : '0x', !onChain || parseInt(i) === chunks.length - 1, rootId);
                         if (!rootId) {
                             var logs = await window.ethArt.getPastLogs({ event: "Minted(address_indexed,address,uint256,uint256)", fromBlock: block });
                             rootId = parseInt(logs[0].data[1]);
                         }
                     } else {
-                        await window.blockchainCall(window.standaloneToken.methods.mint, value, onChain ? chunks[i] : '0x', metadataLink, rootId, !onChain || parseInt(i) === chunks.length - 1, "0x");
+                        await window.blockchainCall(value, window.standaloneToken.methods.mint, onChain ? chunks[i] : '0x', metadataLink, rootId, !onChain || parseInt(i) === chunks.length - 1, "0x");
                         if (!rootId) {
-                            rootId = (parseInt(window.blockchainCall(window.standaloneToken.methods.totalSupply)) -1);
+                            rootId = await window.blockchainCall(window.standaloneToken.methods.totalSupply);
                         }
                     }
+                    value = undefined;
                     if (!onChain) {
                         break;
                     }
@@ -64,7 +65,7 @@ var DeployController = function (view) {
         return 0;
     };
 
-    context.readChunks = function readChunks(file) {
+    context.readChunks = function readChunks(file, dfo) {
         return new Promise(function (ok, ko) {
             var extension;
             try {
@@ -93,7 +94,7 @@ var DeployController = function (view) {
                     return ko("Unsupported file extension (." + extension + ")");
                 }
                 result = "data:" + mimeType + result.substring(result.indexOf(";"));
-                ok(await window.split(result, context.view.state && context.view.state.singleTokenLength, number => {
+                ok(await window.split(result, dfo ? window.context.singleTokenLength : window.context.singleTokenLengthStandalone, number => {
                     context.view.emit('loader/chunks', number);
                 }));
             }, false);
@@ -109,7 +110,8 @@ var DeployController = function (view) {
         !data.background && errors.push("Background color is mandatory");
         (!data.file || data.file.length === 0) && errors.push("Data is mandatory");
         (!data.cover || data.cover.length === 0) && errors.push("Cover is mandatory");
-        !data.regular && !data.onchain && !data.regularStandalone && !data.onchainStandalone && errors.push("You must choose the NFT Type");
+        !data.regular && !data.onchain && errors.push("You must choose the NFT Type");
+        !data.dfo && !data.standalone && errors.push("Please select the Ownership model");
 
         data.cover && data.cover.length > 0 && !(await window.checkCoverSize(data.cover[0])) && errors.push("Cover size must be 350x350 px");
 

@@ -5,6 +5,9 @@ var NftFile = React.createClass({
     onChange(e) {
         e && e.preventDefault && e.preventDefault() && e.stopPropagation && e.stopPropagation();
         var _target = e.currentTarget;
+        if(_target.files.length === 0) {
+            return;
+        }
         var _this = this;
         _this.setState({loading : true}, () => _this.emit('deploy/pause'));
         var reader = new FileReader();
