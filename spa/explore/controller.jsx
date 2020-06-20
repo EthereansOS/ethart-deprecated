@@ -2,23 +2,28 @@ var ExploreController = function (view) {
     var context = this;
     context.view = view;
 
-    context.renderItems = async function renderItems(token) {
+    context.renderItems = async function renderItems() {
         if(!window.ethArtToken) {
             return setTimeout(()=> context.renderItems());
         }
         var pages = await context.renderPages();
-        token = token || window.ethArtToken;
-        context.renderItemsOfToken(ethArtToken, pages.start, pages.end);
+        context.renderItemsOfToken(window.ethArtToken, pages.start, pages.end);
+        context.renderItemsOfToken(window.standaloneToken, pages.start, pages.end);
     };
 
     context.renderItemsOfToken = async function renderItemsOfToken(token, start, end) {
         var items = {};
         var tokenAddress = token.options.address;
+        var totalSupply = parseInt(await window.blockchainCall(token.methods.totalSupply));
+        if(start >= totalSupply) {
+            return;
+        }
+        end = end > totalSupply ? totalSupply : end;
         for(var tokenId = start; tokenId < end; tokenId++) {
             var item = items[tokenId] = {
                 key: tokenId,
                 tokenId,
-                metadataLink : await window.ethArt.getString(window.toStateHolderKey(tokenId)),
+                metadataLink : await window.blockchainCall(token.methods.tokenURI, tokenId),
                 openSeaLink : window.context.openSeaURL + tokenAddress + '/' + tokenId,
                 etherscanLink : window.getNetworkElement('etherscanURL') + 'token/' + tokenAddress + '?a=' + tokenId,
                 tokenAddress,
@@ -36,7 +41,7 @@ var ExploreController = function (view) {
             delete item.loading;
             context.view.setState({items});
         }
-    }
+    };
 
     context.renderPages = async function renderPages() {
         var search = context.view.searchInput.value;
