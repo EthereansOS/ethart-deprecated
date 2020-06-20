@@ -3,6 +3,7 @@ var Deploy = React.createClass({
         'spa/deploy/nftData.jsx',
         'spa/deploy/nftCover.jsx',
         'spa/deploy/nftType.jsx',
+        'spa/deploy/nftOwner.jsx',
         'spa/deploy/nftFile.jsx',
         'spa/deploy/donation.jsx'
     ],
