@@ -24,6 +24,8 @@ This ERC-721 standard Non Fungible Tokens implementation that exploits all the p
 
 In fact, all standard ERC721 methods called in this Contract are totally redirected to the ethArt DFO which really stores and manages real data through its Microservices.
 
+Ethart is an exciting R&D in how this kind of new self-sovereign bank can be used in the future. We made a lot of open source code by developing this reusable by future DFOs.
+
 ### Advantages
 
 1. Flexibility: The community can directly manage it to solve protocol bugs or add features.
@@ -36,6 +38,20 @@ In fact, all standard ERC721 methods called in this Contract are totally redirec
 
 ## Business Model:
 
-This project is open source without any fees added, but users can donate ETH to the DFOhub Wallet, so every donation will increase the backed value of $BUIDL.
+### Ethart Bank:
 
-PS: We'll use this standard for the Logo Challange! More info soon!
+ARTE (Voting Token) holders can rule information of NFTs stored in the State Holder of Ethart (NFT Owner and NFT Data), like an anonymous bank in co-ownership with the ERC721 holders. ARTE tokens are backed by the value of every ERC721 deployed.
+
+This kind of philosophy and architecture is quite different from DFOhub because DFOhub, by design, doesn't own any right from deployed DFOs. But some kinds of applications in the future can use the Ethart example and code, for some reason, like a shared vault or self-sovereign web3 based Social Media.
+
+ARTE tokens are 10,000,000:
+
+- 25% of $ARTE (2,500,000) are locked in the DFOhub Wallet (Owned by $BUIDL holders)
+
+- 60% of $ARTE (6,000,000) are locked in the Ethart Wallet (Owned by $ARTE Holders)
+
+- The only way to receive $ARTE is to mint ERC721 in co-ownership with the Ethart Bank.
+
+You can choose to mint ERC721 in a co-ownership with Ethart Bank (by receiving 100 ARTE and becoming a holder) or maintaining the full ownership of the NFT without receiving $ARTE tokens.
+
+This project is open source without any fees added, but users can donate ETH to the DFOhub Wallet, so every donation will increase the backed value of $BUIDL and used to R&D more in this field.
