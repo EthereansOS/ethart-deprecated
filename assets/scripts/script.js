@@ -105,7 +105,8 @@ window.onEthereumUpdate = function onEthereumUpdate(millis) {
                     return alert('This network is actually not supported!');
                 }
                 update = true;
-                window.DFOHub(window.web3).load(window.getNetworkElement('ethArtAddress')).then(ethArt => window.ethArt = ethArt);
+                window.DFOHub(window.web3).load(window.getNetworkElement('ethArtAddress')).then(async ethArt => window.ethArtToken = window.newContract(window.context.ERC721ABI, await (window.ethArt = ethArt).getAddress("token")));
+                window.standaloneToken = window.newContract(window.context.ERC721ABI, window.getNetworkElement('standaloneTokenAddress'));
             }
             try {
                 window.walletAddress = (await window.web3.eth.getAccounts())[0];

@@ -11,18 +11,18 @@ var Explore = React.createClass({
         }
     },
     renderItem(it) {
-        return (<section key={it.tokenId} className="EXPLORE-ITEM">
+        return (<section key={it.key} className="EXPLORE-ITEM">
             <figure>
                 {it.loading && <Loader/>}
-                {!it.loading && <img src={!it.name ? "assets/img/missingno.png" : window.makeBlockie(it.tokenId + this.state.tokenAddress)}/>}
+                {!it.loading && <img src={!it.name ? "assets/img/missingno.png" : window.makeBlockie(it.tokenId + it.tokenAddress)}/>}
             </figure>
             <section className="ASSET-INFO">
                 <h4>#{it.tokenId} - {it.loading ? "Loading..." : it.name ? window.shortenWord(it.name) : "MISSINGNO."}</h4>
                 <p>{it.description ? window.shortenWord(it.description, 150) : "No description"}</p>
             </section>
             <section className="ASSET-ACTION">
-                <a className="OS" href={this.state.etherscanLink + it.tokenId} target="_blank">Etherscan</a>
-                <a className="OS" target="_blank" href={this.state.openSeaLink + it.tokenId}>OpenSea</a>
+                <a className="OS" href={it.etherscanLink} target="_blank">Etherscan</a>
+                <a className="OS" target="_blank" href={it.openSeaLink}>OpenSea</a>
             </section>
         </section>);
     },

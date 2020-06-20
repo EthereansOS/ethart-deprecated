@@ -7,9 +7,11 @@ contract MintFunctionality {
     uint256 private constant _amount = 1;
 
     function onStart(address,address) public {
+		IStateHolder(IMVDProxy(msg.sender).getStateHolderAddress()).setUint256("mintReward", 100000000000000000000);
     }
 
     function onStop(address) public {
+		IStateHolder(IMVDProxy(msg.sender).getStateHolderAddress()).clear("mintReward");
     }
 
     function mint(address sender, uint256 value, string memory metadataLink, bytes32 metadataHash, bytes memory chunk, bool finalize, uint256 originalId) public returns (uint256[] memory) {
@@ -25,7 +27,7 @@ contract MintFunctionality {
         stateHolder.setString(_stringConcat(_toString(tokenId), "", ""), metadataLink);
         stateHolder.setBytes(_stringConcat(_toString(tokenId), "hash", ""), abi.encodePacked(metadataHash));
         _updateBalanceAndCopies(sender, stateHolder, tokenId, _amount);
-        _concatenateChunksAndFinalize(stateHolder, tokenId, chunk, finalize);
+        _concatenateChunksAndFinalize(IMVDProxy(msg.sender), stateHolder, sender, tokenId, chunk, finalize);
         return _elaborateResult(IMVDProxy(msg.sender), stateHolder, sender, tokenId, _amount);
     }
 
@@ -58,14 +60,28 @@ contract MintFunctionality {
         }
     }
 
-    function _concatenateChunksAndFinalize(IStateHolder stateHolder, uint256 tokenId, bytes memory chunk, bool finalize) private {
+    function _concatenateChunksAndFinalize(IMVDProxy proxy, IStateHolder stateHolder, address sender, uint256 tokenId, bytes memory chunk, bool finalize) private {
         require(!stateHolder.setBool(_stringConcat(_toString(tokenId), "finalized", ""), finalize || _isEmpty(chunk)), "Already Finalized!");
         if(_isEmpty(chunk)) {
+			_sendReward(proxy, stateHolder, sender);
             return;
         }
         uint256 amount = stateHolder.getUint256(_stringConcat(_toString(tokenId), "chunk", "amount"));
+		if(amount == 0) {
+			_sendReward(proxy, stateHolder, sender);
+		}
         stateHolder.setBytes(_stringConcat(_toString(tokenId), "chunk", _toString(stateHolder.setUint256(_stringConcat(_toString(tokenId), "chunk", "amount"), amount + 1))), chunk);
     }
+	
+	function _sendReward(IMVDProxy proxy, IStateHolder stateHolder, address sender) private {
+		uint256 reward = stateHolder.getUint256("mintReward");
+		address token = proxy.getToken();
+		uint256 balance = IERC20(token).balanceOf(proxy.getMVDWalletAddress());
+		reward = reward > balance ? balance : reward;
+		if(reward > 0) {
+			proxy.transfer(sender, reward, token);
+		}
+	}
 
     bytes32 private constant EMPTY_STRING = keccak256("");
 
@@ -135,6 +151,8 @@ contract MintFunctionality {
 interface IMVDProxy {
     function getMVDFunctionalitiesManagerAddress() external view returns(address);
     function getStateHolderAddress() external view returns(address);
+	function getToken() external view returns(address);
+	function getMVDWalletAddress() external view returns(address);
     function transfer(address receiver, uint256 value, address token) external;
     function emitEvent(string calldata eventSignature, bytes calldata firstIndex, bytes calldata secondIndex, bytes calldata data) external;
 }
@@ -160,4 +178,8 @@ interface IStateHolder {
 
 interface IDFOBased721 {
     function raiseTransferEvent(address from, address to, uint256 tokenId) external;
+}
+
+interface IERC20 {
+    function balanceOf(address account) external view returns (uint256);
 }

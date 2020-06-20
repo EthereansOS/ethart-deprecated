@@ -11,7 +11,7 @@ var Balance = React.createClass({
         }
     },
     renderItem(it) {
-        return (<section key={it.tokenId} className="BALANCE-ITEM">
+        return (<section key={it.key} className="BALANCE-ITEM">
             <figure style= {{backgroundColor: it.background_color}}>
                 {it.loading && <Loader/>}
                 {!it.loading && <img src={it.name ? (it.image || "/assets/img/missingno.png") : "/assets/img/missingno.png"}/>}
@@ -20,8 +20,8 @@ var Balance = React.createClass({
                 <p>#{it.tokenId} - {it.loading ? "Loading..." : it.name ? window.shortenWord(it.name) : "MISSINGNO."}</p>
             </section>
             <section className="ASSET-ACTION">
-                <a className="OS" target="_blank" href={this.state.etherscanLink + it.tokenId}>Etherscan</a>
-                <a className="OS" target="_blank" href={this.state.openSeaLink + it.tokenId}>OpenSea</a>
+                <a className="OS" target="_blank" href={it.etherscanLink}>Etherscan</a>
+                <a className="OS" target="_blank" href={it.openSeaLink}>OpenSea</a>
             </section>
         </section>);
     },
