@@ -51,7 +51,7 @@ figure {margin-block-start: 0;margin-block-end: 0;margin-inline-start: 0px;margi
 .shadowPi2 {top: 11px; left: 11px;}
 .shadowPi3 {top: 14px; left: 14px;}
 .SMALL-MENU {width: 300px; display: inline-block; padding:20px; position: absolute; z-index: 5; left: 5px; top: 5px; height: 300px;overflow: hidden;}
-.HUGE-MENU {width: 300px; display: inline-block; padding:20px; position: absolute; z-index: 5; left: 5px; top: 5px; height: 590px;overflow: hidden;}
+.HUGE-MENU {width: 300px; display: inline-block; padding:20px; position: absolute; z-index: 5; left: 5px; top: 5px; height: 590px;overflow: scroll;}
 .SMALL-MENU-P, .SMALL-MENU-G, .HUGE-MENU-Pi {background-color: #041929;}
 .SMALL-MENU-G {overflow-y: scroll; -ms-overflow-style: none;}
 .HUGE-MENU-Pi::-webkit-scrollbar, .SMALL-MENU-G::-webkit-scrollbar {display: none;}
@@ -106,7 +106,7 @@ footer h4 a {font-weight: bolder;display: inline-block; }
 .EXPLORE-ITEM .ASSET-ACTION {width: 83px; display: inline-block;vertical-align: top;}
 .EXPLORE-ITEM .ASSET-ACTION a {width: 60px; display: inline-block; font-size: 12px; text-align: center; margin-left: 10px; padding: 2px 5px; margin-bottom: 5px; background-color: #d664dd; font-weight: bold;  text-decoration: none;}
 .EXPLORE-ITEM .ASSET-ACTION .OS {background-color: #398bf0;}
-.EXPLORE-ITEMS .ASSET-PAGE {display: inline-block;width: 100%;height: 30px;margin-top: 10px;position: absolute;bottom: 20px;left: 0px;}
+.EXPLORE-ITEMS .ASSET-PAGE {display: inline-block;width: 100%;height: 30px;margin-top: 10px; bottom: 20px;left: 0px;}
 .EXPLORE-ITEMS .ASSET-PAGE p {color: #b8b8b8; margin: 0 15px; font-size: 13px;}
 .EXPLORE-ITEMS .ASSET-PAGE a {color: #b8b8b8; text-decoration: none; font-weight: bold;}
 .DISCLAMER {font-size: 12px; font-weight: bold; }
