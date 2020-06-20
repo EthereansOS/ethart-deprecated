@@ -4,18 +4,17 @@ var ExploreController = function (view) {
 
     context.renderItems = async function renderItems(token) {
         if(!window.ethArtToken) {
-            return setTimeout(()=> context.renderItems(search));
+            return setTimeout(()=> context.renderItems());
         }
-        var pages = await renderPages();
+        var pages = await context.renderPages();
         token = token || window.ethArtToken;
-
-        var items = {};
-        
+        context.renderItemsOfToken(ethArtToken, pages.start, pages.end);
     };
 
     context.renderItemsOfToken = async function renderItemsOfToken(token, start, end) {
+        var items = {};
         var tokenAddress = token.options.address;
-        for(var tokenId = pages.start; tokenId < pages.end; tokenId++) {
+        for(var tokenId = start; tokenId < end; tokenId++) {
             var item = items[tokenId] = {
                 key: tokenId,
                 tokenId,
