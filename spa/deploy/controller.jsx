@@ -49,6 +49,7 @@ var DeployController = function (view) {
                 return onException(e);
             }
             context.view.emit('loader/hide');
+            context.view.emit('deploy/done');
         });
     };
 

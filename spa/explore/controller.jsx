@@ -28,8 +28,8 @@ var ExploreController = function (view) {
                 openSeaLink : window.context.openSeaURL + tokenAddress + '/' + tokenId,
                 etherscanLink : window.getNetworkElement('etherscanURL') + 'token/' + tokenAddress + '?a=' + tokenId,
                 tokenAddress,
-                loading: true,
-                ticker
+                ticker,
+                loading: true
             };
             context.view.setState({items});
             var metadata = await window.AJAXRequest(item.metadataLink.split('ipfs://').join('//gateway.ipfs.io/'));

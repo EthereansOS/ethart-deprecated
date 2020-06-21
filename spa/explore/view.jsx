@@ -7,7 +7,8 @@ var Explore = React.createClass({
     },
     getDefaultSubscriptions() {
         return {
-            'ethereum/update' : this.controller.renderItems
+            'ethereum/update' : this.controller.renderItems,
+            'deploy/done' : this.controller.renderItems
         }
     },
     renderItem(it) {

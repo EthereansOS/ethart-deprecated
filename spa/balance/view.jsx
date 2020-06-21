@@ -7,7 +7,8 @@ var Balance = React.createClass({
     },
     getDefaultSubscriptions() {
         return {
-            'ethereum/ping' : this.controller.renderItems
+            'ethereum/ping' : this.controller.renderItems,
+            'deploy/done' : this.controller.renderItems
         }
     },
     renderItem(it) {
