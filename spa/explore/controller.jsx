@@ -2,24 +2,24 @@ var ExploreController = function (view) {
     var context = this;
     context.view = view;
 
-    context.renderItems = async function renderItems() {
+    context.renderItems = async function renderItems(view) {
         if(!window.ethArtToken) {
-            return setTimeout(()=> context.renderItems());
+            return setTimeout(()=> context.renderItems(view));
         }
-        var pages = await context.renderPages();
+        var token = window[view.props.token + "Token"];
+        var pages = await context.renderPages(view, token);
         var items = {};
-        context.renderItemsOfToken(window.ethArtToken, items, pages.start, pages.end);
-        context.renderItemsOfToken(window.standaloneToken, items, pages.start, pages.end);
+        context.renderItemsOfToken(view, token, items, pages.start, pages.end);
     };
 
-    context.renderItemsOfToken = async function renderItemsOfToken(token, items, start, end) {
+    context.renderItemsOfToken = async function renderItemsOfToken(view, token, items, start, end) {
         var tokenAddress = token.options.address;
         var ticker = await window.blockchainCall(token.methods.symbol);
         var totalSupply = parseInt(await window.blockchainCall(token.methods.totalSupply));
         if(start >= totalSupply) {
             return;
         }
-        end = end > totalSupply ? totalSupply : end;
+        end = end > (totalSupply + 1) ? totalSupply + 1 : end;
         for(var tokenId = start; tokenId < end; tokenId++) {
             var item = items[tokenId + "_" + tokenAddress] = {
                 key: tokenId + "_" + tokenAddress,
@@ -31,7 +31,7 @@ var ExploreController = function (view) {
                 ticker,
                 loading: true
             };
-            context.view.setState({items});
+            view.setState({items});
             var metadata = await window.AJAXRequest(item.metadataLink.split('ipfs://').join('//gateway.ipfs.io/'));
             Object.keys(metadata).forEach(key => item[key] = metadata[key]);
             Object.keys(item).forEach(key => {
@@ -41,25 +41,25 @@ var ExploreController = function (view) {
                 }
             });
             delete item.loading;
-            context.view.setState({items});
+            view.setState({items});
         }
     };
 
-    context.renderPages = async function renderPages() {
-        var search = context.view.searchInput.value;
+    context.renderPages = async function renderPages(view, token) {
+        var search = view.searchInput.value;
         search = search === '' ? undefined : parseInt(search);
-        context.view.setState({items: null});
-        var nextId = await window.ethArt.getUint256('nextId');
+        view.setState({items: null});
+        var nextId = window.numberToString(parseInt(await window.blockchainCall(token.methods.totalSupply)) + 1);
         if(nextId <= search) {
             return;
         }
         nextId = isNaN(search) ? nextId : (search + 1);
-        var totalSupply = parseInt(await window.ethArt.getUint256('totalSupply'));
+        var totalSupply = parseInt(nextId) - 1;
         var totalPages = totalSupply / window.context.explorePageLimit;
         totalPages = totalPages <= 0 ? 1 : totalPages;
         totalPages = context.roundUp(totalPages);
-        var page = context.view.state && context.view.state.page || 1;
-        context.view.setState({page, totalPages});
+        var page = view.state && view.state.page || 1;
+        view.setState({page, totalPages});
 
         var start = isNaN(search) ? 1 : search;
         var end = parseInt(nextId);

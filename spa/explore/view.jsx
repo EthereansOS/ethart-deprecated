@@ -3,12 +3,12 @@ var Explore = React.createClass({
         'spa/loader.jsx'
     ],
     componentDidMount() {
-        this.controller.renderItems();
+        this.controller.renderItems(this);
     },
     getDefaultSubscriptions() {
         return {
-            'ethereum/update' : this.controller.renderItems,
-            'deploy/done' : this.controller.renderItems
+            'ethereum/update' : () => this.controller.renderItems(this),
+            'deploy/done' : () => this.controller.renderItems(this),
         }
     },
     renderItem(it) {
@@ -30,15 +30,18 @@ var Explore = React.createClass({
     onSearch(e) {
         e && e.preventDefault && e.preventDefault(true) && e.stopPropagation && e.stopPropagation(true);
         this.searchTimeout && window.clearTimeout(this.searchTimeout);
-        this.searchTimeout = window.setTimeout(this.controller.renderItems, 500);
+        var _this = this;
+        this.searchTimeout = window.setTimeout(() => _this.controller.renderItems(_this), 500);
     },
     changePage(num) {
         var page = this.state && this.state.page || 1;
         page+= num;
         page = page <= 0 ? 1 : page > this.state.totalPages ? this.state.totalPages : page;
-        this.setState({page}, this.controller.renderItems);
+        var _this = this;
+        this.setState({page}, () => _this.controller.renderItems(_this));
     },
     render() {
+        var _this = this;
         return (<section className={this.props.className}>
             <section className="EXPLORE">
             <section className="HUGE-BOX">
@@ -50,7 +53,7 @@ var Explore = React.createClass({
                         <section className="EXPLORE-ITEMS">
                             <section className="EXPLORE-SEARCH">
                                 <input ref={ref => this.searchInput = ref} type="search" onChange={this.onSearch}/>
-                                <a href="javascript:;" onClick={this.controller.renderItems}>search</a>
+                                <a href="javascript:;" onClick={() => _this.controller.renderItems(_this)}>search</a>
                             </section>
                                 {this.state && this.state.items && Object.values(this.state.items).map(this.renderItem)}
                                 {(!this.searchInput || this.searchInput.value === '') && this.state && this.state.totalPages && this.state.totalPages !== 1 &&<section className="ASSET-PAGE">
@@ -61,7 +64,7 @@ var Explore = React.createClass({
                         </section>
                     </section>
                 </section>
-            </section>        
+            </section>
         </section>);
     }
 });
