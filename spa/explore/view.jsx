@@ -38,17 +38,29 @@ var Explore = React.createClass({
         this.setState({page}, this.controller.renderItems);
     },
     render() {
-        return (<section className="EXPLORE-ITEMS">
-            <section className="EXPLORE-SEARCH">
-                <input ref={ref => this.searchInput = ref} type="search" onChange={this.onSearch}/>
-                <a href="javascript:;" onClick={this.controller.renderItems}>search</a>
-            </section>
-            {this.state && this.state.items && Object.values(this.state.items).map(this.renderItem)}
-            {(!this.searchInput || this.searchInput.value === '') && this.state && this.state.totalPages && this.state.totalPages !== 1 &&<section className="ASSET-PAGE">
-                {this.state && this.state.page > 1 && <a href="javascript:;" onClick={() => this.changePage(-1)}>&#8592;</a>}
-                <p>Page {this.state.page} of {this.state.totalPages}</p>
-                {this.state && this.state.page < this.state.totalPages && <a href="javascript:;" onClick={() => this.changePage(1)}>&#8594;</a>}
-            </section>}
+        return (<section className={this.props.className}>
+            <section className="EXPLORE">
+            <section className="HUGE-BOX">
+                <section className="shadowPi shadowPi1"></section>
+                <section className="shadowPi shadowPi2"></section>
+                <section className="shadowPi shadowPi3"></section>
+                <section className="HUGE-MENU HUGE-MENU-Pi">
+                    <h3>Explore {this.props.className} NFTs <a href="http://erc721.org/" target="_Blank"></a></h3>
+                        <section className="EXPLORE-ITEMS">
+                            <section className="EXPLORE-SEARCH">
+                                <input ref={ref => this.searchInput = ref} type="search" onChange={this.onSearch}/>
+                                <a href="javascript:;" onClick={this.controller.renderItems}>search</a>
+                            </section>
+                                {this.state && this.state.items && Object.values(this.state.items).map(this.renderItem)}
+                                {(!this.searchInput || this.searchInput.value === '') && this.state && this.state.totalPages && this.state.totalPages !== 1 &&<section className="ASSET-PAGE">
+                                    {this.state && this.state.page > 1 && <a href="javascript:;" onClick={() => this.changePage(-1)}>&#8592;</a>}
+                                    <p>Page {this.state.page} of {this.state.totalPages}</p>
+                                    {this.state && this.state.page < this.state.totalPages && <a href="javascript:;" onClick={() => this.changePage(1)}>&#8594;</a>}
+                            </section>}
+                        </section>
+                    </section>
+                </section>
+            </section>        
         </section>);
     }
 });

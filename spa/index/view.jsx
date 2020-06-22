@@ -40,17 +40,8 @@ var Index = React.createClass({
                     </section>
                 </section>
             </section>
-            <section className="EXPLORE">
-                <section className="HUGE-BOX">
-                    <section className="shadowPi shadowPi1"></section>
-                    <section className="shadowPi shadowPi2"></section>
-                    <section className="shadowPi shadowPi3"></section>
-                    <section className="HUGE-MENU HUGE-MENU-Pi">
-                        <h3>Explore NFTs <a href="http://erc721.org/" target="_Blank"></a></h3>
-                        <Explore />
-                    </section>
-                </section>
-            </section>
+            <Explore className="ARTE"/>
+            <Explore className="ETRA"/>
             <footer>
                 <h4>Made with ❤️ by the <a href="https://dfohub.com" target="_Blank">DFOhub</a> team for Etherean Artists, you can verify the code you're running <a href="https://dapp.dfohub.com/?addr=0x4A08d087817Fa803ef3E0B4E17D7856692F5d68D" target="_Blank">here</a> and the R&D repo <a href="https://github.com/b-u-i-d-l/ethArt" target="_Blank">here</a></h4>
                 <p className="DISCLAMER">Every on-chain file is available to everyone, be careful to don't transact personal data. Ethereum and IPFS power everything here. Whatever action you take, you have full responsibility.</p>
