@@ -46,11 +46,11 @@ This kind of philosophy and architecture is quite different from DFOhub because 
 
 ARTE tokens are 10,000,000:
 
-- 25% of $ARTE (2,500,000) are locked in the DFOhub Wallet (Owned by $BUIDL holders)
+- 25% of $ARTE (2,500,000) are locked in the DFOhub Wallet [0x5D40c724ba3e7Ffa6a91db223368977C522BdACD] (Owned by $BUIDL holders)
 
-- 60% of $ARTE (6,000,000) are locked in the Ethart Wallet (Owned by $ARTE Holders, everytime a user mint a ERC721 in a co-ownership with Ethart Bank, the 100 ARTE are paid from this wallet) 
+- 60% of $ARTE (6,000,000) are locked in the Ethart Wallet [0x7687fd356d1BD155e72B6eee6c2E2067F08489fB] (Owned by $ARTE Holders, everytime a user mint a ERC721 in a co-ownership with Ethart Bank, the 100 ARTE are paid from this wallet) 
 
-- 13.5% (1,3500) are locked in the BUIDLERS FUND, the operational fund of DFO Core Team, with a Fair Inflation meccanism of the 1.21% (121,000 ARTE) in a year
+- 13.5% (1,3500) are locked in the BUIDLERS FUND [0x2BbBC1238b567F240A915451bE0D8c210895aa95], the operational fund of DFO Core Team, with a Fair Inflation meccanism of the 1.21% (121,000 ARTE) in a year
 
 - The only way to receive $ARTE is to mint ERC721 in co-ownership with the Ethart Bank.
 
@@ -62,15 +62,15 @@ A sustainable economic model for DFO-based Startups to maintain value and funds 
 
 The V1 is the BUIDL fair inflation available here: https://drive.google.com/file/d/1_QZr5CjNsQKGxoJ5WkI9iPJGs4PdKWol
 
-In this Experiment based on ARTE Token, we'll inflate in one year the 1.21% (121,000) of the ARTE total Supply (10,000,000).
+In this Experiment based on ARTE Token, we'll inflate in one year the 1.21% (121,000) of the $ARTE total Supply (10,000,000).
 
 Inflation events will be every week (50,000 ETH Blocks) In two Uniswap Exchanges:
-- Uniswap V2 ETH/ARTE (1,100 ARTE Every Week) 0.01% Weekly Inflation
-- Uniswap V2 BUIDL/ARTE (1,100 ARTE Every Week) 0.01% Weekly Inflation
-For a total of 2,200 ARTE every week (0.02%)
+- Uniswap V2 $ETH/$ARTE (1,100 $ARTE Every Week) 0.01% Weekly Inflation
+- Uniswap V2 $BUIDL/$ARTE (1,100 $ARTE Every Week) 0.01% Weekly Inflation
+For a total of 2,200 $ARTE every week (0.02%)
 
 Smart Contract: https://github.com/b-u-i-d-l/ethArt/blob/master/contracts/EthartFairInflation.sol
 
-This is an interesting experiment, because more the ARTE token is valuable, more BUIDL token will be removed from the Circulating Supply. This Fair Inflation mechanism will be used to empower the DFOhub Operations like the BUIDL Fair Inflation from the BUIDLERS FUND.
+This is an interesting experiment, because more the $ARTE token is valuable, more BUIDL token will be removed from the Circulating Supply. This Fair Inflation mechanism will be used to empower the DFOhub Operations like the BUIDL Fair Inflation from the BUIDLERS FUND.
 
 This project is open source without any fees added, but users can donate ETH to the DFOhub Wallet, so every donation will increase the backed value of $BUIDL and used to R&D more in this field.
