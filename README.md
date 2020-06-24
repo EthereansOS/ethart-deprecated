@@ -48,10 +48,29 @@ ARTE tokens are 10,000,000:
 
 - 25% of $ARTE (2,500,000) are locked in the DFOhub Wallet (Owned by $BUIDL holders)
 
-- 60% of $ARTE (6,000,000) are locked in the Ethart Wallet (Owned by $ARTE Holders)
+- 60% of $ARTE (6,000,000) are locked in the Ethart Wallet (Owned by $ARTE Holders, everytime a user mint a ERC721 in a co-ownership with Ethart Bank, the 100 ARTE are paid from this wallet) 
+
+- 13.5% (1,3500) are locked in the BUIDLERS FUND, the operational fund of DFO Core Team, with a Fair Inflation meccanism of the 1.21% (121,000 ARTE) in a year
 
 - The only way to receive $ARTE is to mint ERC721 in co-ownership with the Ethart Bank.
 
 You can choose to mint ERC721 in a co-ownership with Ethart Bank (by receiving 100 ARTE and becoming a holder) or maintaining the full ownership of the NFT without receiving $ARTE tokens.
+
+### Ethart Fair Inflation:
+
+A sustainable economic model for DFO-based Startups to maintain value and funds operations | ethart version
+
+The V1 is the BUIDL fair inflation available here: https://drive.google.com/file/d/1_QZr5CjNsQKGxoJ5WkI9iPJGs4PdKWol
+
+In this Experiment based on ARTE Token, we'll inflate in one year the 1.21% (121,000) of the ARTE total Supply (10,000,000).
+
+Inflation events will be every week (50,000 ETH Blocks) In two Uniswap Exchanges:
+- Uniswap V2 ETH/ARTE (1,100 ARTE Every Week) 0.01% Weekly Inflation
+- Uniswap V2 BUIDL/ARTE (1,100 ARTE Every Week) 0.01% Weekly Inflation
+For a total of 2,200 ARTE every week (0.02%)
+
+Smart Contract: https://github.com/b-u-i-d-l/ethArt/blob/master/contracts/EthartFairInflation.sol
+
+This is an interesting experiment, because more the ARTE token is valuable, more BUIDL token will be removed from the Circulating Supply. This Fair Inflation mechanism will be used to empower the DFOhub Operations like the BUIDL Fair Inflation from the BUIDLERS FUND.
 
 This project is open source without any fees added, but users can donate ETH to the DFOhub Wallet, so every donation will increase the backed value of $BUIDL and used to R&D more in this field.
