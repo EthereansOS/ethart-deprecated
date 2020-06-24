@@ -52,7 +52,7 @@ ARTE tokens are 10,000,000:
 
 - 13.5% (1,3500) are locked in the BUIDLERS FUND [0x2BbBC1238b567F240A915451bE0D8c210895aa95], the operational fund of DFO Core Team, with a Fair Inflation meccanism of the 1.21% (121,000 ARTE) in a year
 
-- The only way to receive $ARTE is to mint ERC721 in co-ownership with the Ethart Bank.
+The only way to receive $ARTE is to mint ERC721 in co-ownership with the Ethart Bank.
 
 You can choose to mint ERC721 in a co-ownership with Ethart Bank (by receiving 100 ARTE and becoming a holder) or maintaining the full ownership of the NFT without receiving $ARTE tokens.
 
