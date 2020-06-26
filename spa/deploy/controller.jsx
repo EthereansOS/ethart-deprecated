@@ -23,15 +23,16 @@ var DeployController = function (view) {
             var block = await window.web3.eth.getBlockNumber();
             try {
                 for (var i in chunks) {
-                    context.view.emit('loader/transaction', parseInt(i) + 1, onChain ? chunks.length : 1);
+                    i = parseInt(i);
+                    context.view.emit('loader/transaction', i + 1, onChain ? chunks.length : 1);
                     if(data.dfo) {
-                        var result = await window.ethArt.mint(value, metadataLink, metadataHash, onChain ? chunks[i] : '0x', !onChain || parseInt(i) === chunks.length - 1, rootId);
+                        var result = await window.ethArt.mint(i == 0 ? value : undefined, i == 0 ? metadataLink : '', i == 0 ? metadataHash : '0x', onChain ? chunks[i] : '0x', !onChain || i === chunks.length - 1, rootId);
                         if (!rootId) {
                             var logs = await window.ethArt.getPastLogs({ event: "Minted(address_indexed,address,uint256,uint256)", fromBlock: block });
                             rootId = parseInt(logs[0].data[1]);
                         }
                     } else {
-                        await window.blockchainCall(value, window.standaloneToken.methods.mint, onChain ? chunks[i] : '0x', metadataLink, rootId, !onChain || parseInt(i) === chunks.length - 1, "0x");
+                        await window.blockchainCall(i == 0 ? value : '', window.standaloneToken.methods.mint, onChain ? chunks[i] : '0x', i == 0 ? metadataLink : '', rootId, !onChain || i === chunks.length - 1, "0x");
                         if (!rootId) {
                             rootId = await window.blockchainCall(window.standaloneToken.methods.totalSupply);
                         }
@@ -113,8 +114,6 @@ var DeployController = function (view) {
         (!data.cover || data.cover.length === 0) && errors.push("Cover is mandatory");
         !data.regular && !data.onchain && errors.push("You must choose the NFT Type");
         !data.dfo && !data.standalone && errors.push("Please select the Ownership model");
-
-        data.cover && data.cover.length > 0 && !(await window.checkCoverSize(data.cover[0])) && errors.push("Cover size must be 350x350 px");
 
         if (errors.length > 0) {
             throw errors.join('\n');

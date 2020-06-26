@@ -19,14 +19,18 @@ contract MintFunctionality {
         if(value > 0) {
             IMVDProxy(msg.sender).transfer(stateHolder.getAddress("dfoHubWallet"), value, address(0));
         }
-        uint256 tokenId = originalId != 0 ? originalId : stateHolder.getUint256("nextId");
-        tokenId = tokenId == 0 ? 1 : tokenId;
-        stateHolder.setUint256("nextId", tokenId + (_amount == 0 ? 1 : _amount));
-        stateHolder.setUint256("totalSupply", stateHolder.getUint256("totalSupply") + (_amount == 0 ? 1 : _amount));
-        stateHolder.setAddress(_stringConcat(_toString(tokenId), "owner", ""), sender);
-        stateHolder.setString(_stringConcat(_toString(tokenId), "", ""), metadataLink);
-        stateHolder.setBytes(_stringConcat(_toString(tokenId), "hash", ""), abi.encodePacked(metadataHash));
-        _updateBalanceAndCopies(sender, stateHolder, tokenId, _amount);
+        uint256 nextId = stateHolder.getUint256("nextId");
+        nextId = nextId == 0 ? 1 : nextId;
+        uint256 tokenId = originalId != 0 ? originalId : nextId;
+        require(tokenId <= nextId, "Unknown tokenId");
+        if(tokenId == newxtId) {
+            stateHolder.setUint256("nextId", tokenId + (_amount == 0 ? 1 : _amount));
+            stateHolder.setUint256("totalSupply", stateHolder.getUint256("totalSupply") + (_amount == 0 ? 1 : _amount));
+            stateHolder.setAddress(_stringConcat(_toString(tokenId), "owner", ""), sender);
+            stateHolder.setString(_stringConcat(_toString(tokenId), "", ""), metadataLink);
+            stateHolder.setBytes(_stringConcat(_toString(tokenId), "hash", ""), abi.encodePacked(metadataHash));
+            _updateBalanceAndCopies(sender, stateHolder, tokenId, _amount);
+        }
         _concatenateChunksAndFinalize(IMVDProxy(msg.sender), stateHolder, sender, tokenId, chunk, finalize);
         return _elaborateResult(IMVDProxy(msg.sender), stateHolder, sender, tokenId, _amount);
     }

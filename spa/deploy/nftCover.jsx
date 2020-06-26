@@ -11,8 +11,6 @@ var NftCover = React.createClass({
         var _this = this;
         _this.setState({loading : true}, () => _this.emit('deploy/pause'));
         window.checkCoverSize(target.files[0]).then(result => {
-            !result && alert("Cover must be a png of 350x350 px");
-            !result && (target.value = '');
             _this.setState({loading : false}, () => _this.emit('deploy/resume'));
         });
     },
@@ -21,7 +19,7 @@ var NftCover = React.createClass({
             <section className="DEPLOY-INFO">
                 <label htmlFor="cover">Cover:</label>
                 <input id="cover" data-mandatory="true" accept=".png" type="file" onChange={this.onChange}/>
-                <p>A Preview cover for dapps and wallets. <br></br><b>Format: .png | Size (px): 350x350</b></p>
+                <p>A Preview cover for dapps and wallets.</p>
                 {this.state && this.state.loading && <Loader/>}
             </section>
             <section className="DEPLOY-INFO">

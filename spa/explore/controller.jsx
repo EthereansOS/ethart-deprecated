@@ -21,10 +21,25 @@ var ExploreController = function (view) {
         }
         end = end > (totalSupply + 1) ? totalSupply + 1 : end;
         for(var tokenId = start; tokenId < end; tokenId++) {
+            var metadataLink = await window.blockchainCall(token.methods.tokenURI, tokenId);
+            if(!metadataLink) {
+                try {
+                    var metadata = await window.blockchainCall(token.methods.metadata, tokenId);
+                } catch(e) {
+                    try {
+                        var owner = await window.ethArt.getAddress(tokenId + "_owner");
+                        if(owner === window.voidEthereumAddress) {
+                            continue;
+                        }
+                    } catch(e) {
+                        continue;
+                    }
+                }
+            }
             var item = items[tokenId + "_" + tokenAddress] = {
                 key: tokenId + "_" + tokenAddress,
                 tokenId,
-                metadataLink : await window.blockchainCall(token.methods.tokenURI, tokenId),
+                metadataLink,
                 openSeaLink : window.context.openSeaURL + tokenAddress + '/' + tokenId,
                 etherscanLink : window.getNetworkElement('etherscanURL') + 'token/' + tokenAddress + '?a=' + tokenId,
                 tokenAddress,
