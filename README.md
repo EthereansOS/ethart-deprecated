@@ -75,7 +75,7 @@ For a total of 2,200 $ARTE every week (0.02%)
 
 Smart Contract: https://github.com/b-u-i-d-l/ethArt/blob/master/contracts/EthartFairInflation.sol
 
-As $ARTE becomes more valuable, $BUIDL will be removed from the circulating supply. This mechanism will empower DFOhub operations.
+As $ARTE becomes more valuable, more $BUIDL will be removed from the circulating supply.
 
 It will be an interesting experiment.
 
