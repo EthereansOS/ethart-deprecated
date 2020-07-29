@@ -25,7 +25,7 @@
         "svg" : "image/svg+xml",
         "gif" : "image/gif",
         "mp3" : "audio/mpeg",
-        "mp4" : "audio/mp4",
+        "mp4" : "video/mp4",
         "ogg" : "audio/ogg",
         "sol" : "text/plain",
         "txt" : "text/plain",
